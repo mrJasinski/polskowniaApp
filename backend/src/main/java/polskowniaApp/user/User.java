@@ -1,7 +1,6 @@
 package polskowniaApp.user;
 
 import jakarta.persistence.*;
-import polskowniaApp.lecture.Lecture;
 
 @Entity
 @Table(name = "users")
@@ -15,9 +14,27 @@ public class User
     private String password;
     @Enumerated(EnumType.STRING)
     private UserRole role;
-    @ManyToOne
-    @JoinColumn(name = "lecture_id")
-    private Lecture lecture;
+//    @ManyToOne
+//    @JoinColumn(name = "lecture_id")
+//    private Lecture lecture;
+
+
+    User()
+    {
+    }
+
+    User(final String email, final String password, final UserRole role)
+    {
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
+    User(final String name, final String email, final String password, final UserRole role)
+    {
+        this(email, password, role);
+        this.name = name;
+    }
 
     int getId()
     {

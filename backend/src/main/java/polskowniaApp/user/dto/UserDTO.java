@@ -4,6 +4,7 @@ import polskowniaApp.user.UserRole;
 
 public class UserDTO
 {
+    private String name;
     private String email;
     private String password;
     private UserRole role;
@@ -17,6 +18,17 @@ public class UserDTO
         this.email = email;
         this.password = password;
         this.role = role;
+    }
+
+    UserDTO(final String name, final String email, final String password, final UserRole role)
+    {
+        this(email, password, role);
+        this.name = name;
+    }
+
+    public String getName()
+    {
+        return this.name;
     }
 
     public String getEmail()
