@@ -1,0 +1,12 @@
+polskowniaApp\course\lecture\Lecture.class
+polskowniaApp\course\SqlCourseRepository.class
+polskowniaApp\course\CourserRepository.class
+polskowniaApp\user\UserInitializer.class
+polskowniaApp\course\CourseService.class
+polskowniaApp\user\SqlUserRepository.class
+polskowniaApp\course\CourseStatus.class
+polskowniaApp\utils\DataSourceConfig.class
+polskowniaApp\utils\Utils.class
+polskowniaApp\course\dto\CourseDTO.class
+polskowniaApp\course\Course.class
+polskowniaApp\course\CourseController.class
