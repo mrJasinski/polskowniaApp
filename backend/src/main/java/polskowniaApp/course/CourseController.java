@@ -1,20 +1,24 @@
 package polskowniaApp.course;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import polskowniaApp.course.dto.CourseDTO;
+import polskowniaApp.security.JwtService;
 
 @RestController
 class CourseController
 {
     private final CourseService courseService;
+    private final JwtService jwtService;
 
-    CourseController(final CourseService courseService)
+    CourseController(final CourseService courseService, final JwtService jwtService)
     {
         this.courseService = courseService;
+        this.jwtService = jwtService;
     }
 
 
@@ -36,5 +40,11 @@ class CourseController
     ResponseEntity<?> getAllOngoingCoursesAsDto()
     {
         return ResponseEntity.ok(this.courseService.getCoursesByStatusAsDto(CourseStatus.ONGOING));
+    }
+
+    @GetMapping("/myCourses")
+    ResponseEntity<?> getMyCourses(HttpServletRequest request)
+    {
+        return ResponseEntity.ok(this.courseService.getCoursesByUserIdAsDto(this.jwtService.getUserIdFromToken(request)));
     }
 }

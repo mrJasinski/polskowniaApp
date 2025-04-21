@@ -109,4 +109,9 @@ public class JwtService
     {
         return this.userService.getUserIdByEmail(extractUsername(getToken(request)));
     }
+
+    public String getUserEmailFromToken(final HttpServletRequest request)
+    {
+        return extractUsername(getToken(request));
+    }
 }

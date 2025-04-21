@@ -1,6 +1,5 @@
 D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\course\SqlCourseRepository.java
 D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\security\config\AppPasswordEncoder.java
-D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\course\CourserRepository.java
 D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\user\dto\UserLoggedDTO.java
 D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\Main.java
 D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\security\filter\JwtAuthFilter.java
@@ -10,8 +9,10 @@ D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\security\JwtServic
 D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\user\UserInitializer.java
 D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\user\dto\UserDTO.java
 D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\course\CourseService.java
+D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\course\CourseRepository.java
 D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\utils\Utils.java
 D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\user\UserRole.java
+D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\course\CourseAssignment.java
 D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\course\dto\CourseDTO.java
 D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\user\UserController.java
 D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\user\UserRepository.java

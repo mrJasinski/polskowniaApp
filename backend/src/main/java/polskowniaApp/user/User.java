@@ -1,6 +1,10 @@
 package polskowniaApp.user;
 
 import jakarta.persistence.*;
+import polskowniaApp.course.Course;
+import polskowniaApp.course.CourseAssignment;
+
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -14,10 +18,8 @@ public class User
     private String password;
     @Enumerated(EnumType.STRING)
     private UserRole role;
-//    @ManyToOne
-//    @JoinColumn(name = "lecture_id")
-//    private Lecture lecture;
-
+    @OneToMany(mappedBy = "user")
+    private Set<CourseAssignment> assignments;
 
     User()
     {

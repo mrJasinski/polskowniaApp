@@ -2,9 +2,11 @@ package polskowniaApp.course;
 
 import java.util.List;
 
-interface CourserRepository
+interface CourseRepository
 {
     List<Course> findAll();
 
     List<Course> findByStatus(CourseStatus status);
+
+    List<Course> findByUserId(int userId);
 }
