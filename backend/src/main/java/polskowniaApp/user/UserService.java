@@ -35,7 +35,10 @@ public class UserService
 
     UserDTO toDto(final User user)
     {
-        return new UserDTO(user.getEmail(), user.getPassword(), user.getRole());
+        return new UserDTO(
+                user.getEmail()
+                , user.getPassword()
+                , user.getRole());
     }
 
     boolean existsByEmail(final String email)
@@ -64,8 +67,8 @@ public class UserService
 //        also after first log in user sets system name
 
 
-//        password encoding into Bcreypt?
-//        and generaing
+//        password encoding into Bcrypt?
+//        and generating
         return null;
     }
 

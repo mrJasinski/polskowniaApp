@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import polskowniaApp.course.lecture.Lecture;
 import polskowniaApp.user.User;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Set;
@@ -17,13 +18,60 @@ public class Course
     private int id;
     private LocalDate startDate;
     private LocalTime startTime;    // lecture start time
-    private Set<String> days;   //weekdays when lectures are
+    private String days;   //weekdays when lectures are
     private int length;
     private int duration;   // lecture time [mins]
+    @Enumerated(EnumType.STRING)
     private CourseStatus status;
     @OneToMany(mappedBy = "course")
     private Set<CourseAssignment> assignments;
     @OneToMany(mappedBy = "course")
     private Set<Lecture> lectures;
-//    materials - materiały zamieszczane przez naczyciela oraz prace przesyłane przez użytkowników oraz potem sprawdzone przez nauczyciela
+
+    Course()
+    {
+    }
+
+    Course(final LocalDate startDate, final LocalTime startTime, final String days, final int length, final int duration)
+    {
+        this.startDate = startDate;
+        this.startTime = startTime;
+        this.days = days;
+        this.length = length;
+        this.duration = duration;
+        this.status = CourseStatus.CREATED;
+    }
+
+    //    materials - materiały zamieszczane przez naczyciela oraz prace przesyłane przez użytkowników oraz potem sprawdzone przez nauczyciela
+
+
+    int getId()
+    {
+        return this.id;
+    }
+
+    LocalDate getStartDate()
+    {
+        return this.startDate;
+    }
+
+    LocalTime getStartTime()
+    {
+        return this.startTime;
+    }
+
+    String getDays()
+    {
+        return this.days;
+    }
+
+    int getLength()
+    {
+        return this.length;
+    }
+
+    int getDuration()
+    {
+        return this.duration;
+    }
 }

@@ -11,6 +11,7 @@ D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\user\dto\UserDTO.j
 D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\course\CourseService.java
 D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\course\CourseRepository.java
 D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\utils\Utils.java
+D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\course\LectureRepository.java
 D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\user\UserRole.java
 D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\course\CourseAssignment.java
 D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\course\dto\CourseDTO.java
@@ -23,6 +24,7 @@ D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\course\Course.java
 D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\utils\DataSourceConfig.java
 D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\course\CourseController.java
 D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\security\config\AuthManager.java
+D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\course\SqlLectureRepository.java
 D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\security\filter\CsrfCookieFilter.java
 D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\course\lecture\Lecture.java
 D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\user\User.java

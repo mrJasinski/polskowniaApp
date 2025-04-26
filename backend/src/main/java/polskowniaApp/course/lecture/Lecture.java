@@ -22,4 +22,30 @@ public class Lecture
     {
         this.lectureDate = lectureDate;
     }
+
+    public Lecture(final LocalDate lectureDate, final Course course)
+    {
+        this.lectureDate = lectureDate;
+        this.course = course;
+    }
+
+    public int getId()
+    {
+        return this.id;
+    }
+
+    public LocalDate getLectureDate()
+    {
+        return this.lectureDate;
+    }
+
+    public String getTitle()
+    {
+        return this.title;
+    }
+
+    public Course getCourse()
+    {
+        return this.course;
+    }
 }

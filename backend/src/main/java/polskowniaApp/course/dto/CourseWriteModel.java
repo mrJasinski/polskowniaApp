@@ -1,25 +1,22 @@
 package polskowniaApp.course.dto;
 
-import polskowniaApp.course.CourseStatus;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Set;
 
-public class CourseDTO
+public class CourseWriteModel
 {
     private LocalDate startDate;
     private LocalTime startTime;    // lecture start time
-    private Set<String> days;   //weekdays when lectures are
+    private Set<Integer> days;   //weekdays when lectures are
     private int length;
     private int duration;   // lecture time [mins]
-    private CourseStatus status;
 
-    public CourseDTO()
+    CourseWriteModel()
     {
     }
 
-    public CourseDTO(final LocalDate startDate, final LocalTime startTime, final Set<String> days, final int length, final int duration)
+    CourseWriteModel(final LocalDate startDate, final LocalTime startTime, final Set<Integer> days, final int length, final int duration)
     {
         this.startDate = startDate;
         this.startTime = startTime;
@@ -38,7 +35,7 @@ public class CourseDTO
         return this.startTime;
     }
 
-    public Set<String> getDays()
+    public Set<Integer> getDays()
     {
         return this.days;
     }
@@ -51,10 +48,5 @@ public class CourseDTO
     public int getDuration()
     {
         return this.duration;
-    }
-
-    public CourseStatus getStatus()
-    {
-        return this.status;
     }
 }

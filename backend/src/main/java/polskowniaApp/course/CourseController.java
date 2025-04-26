@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import polskowniaApp.course.dto.CourseDTO;
+import polskowniaApp.course.dto.CourseWriteModel;
 import polskowniaApp.security.JwtService;
 
 @RestController
@@ -23,7 +24,7 @@ class CourseController
 
 
     @PostMapping("/createCourse")
-    ResponseEntity<?> createCourse(@RequestBody CourseDTO toSave)
+    ResponseEntity<?> createCourse(@RequestBody CourseWriteModel toSave)
     {
         this.courseService.createCourse(toSave);
 

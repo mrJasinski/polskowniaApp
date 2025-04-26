@@ -11,9 +11,9 @@ public class CourseAssignment
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-    @ManyToOne
     @JoinColumn(name = "course_id")
     private Course course;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

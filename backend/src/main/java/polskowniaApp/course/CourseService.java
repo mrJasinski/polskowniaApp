@@ -2,10 +2,10 @@ package polskowniaApp.course;
 
 import org.springframework.stereotype.Service;
 import polskowniaApp.course.dto.CourseDTO;
+import polskowniaApp.course.dto.CourseWriteModel;
 import polskowniaApp.course.lecture.Lecture;
 
 import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -23,26 +23,48 @@ class CourseService
         this.lectureRepo = lectureRepo;
     }
 
-
-    void createCourse(final CourseDTO toSave)
+    void createCourse(final CourseWriteModel toSave)
     {
+        var course = this.courseRepo.save(new Course(
+                toSave.getStartDate()
+                , toSave.getStartTime()
+                , wrapDaysIntoString(toSave.getDays())
+                , toSave.getLength()
+                , toSave.getDuration()));
+
+        createLecturesByCourse(course);
 //        create course object
 //          create lectures in course
-//        create user accounts? if doesn't exist
+//        create user accounts? unless exist and assign them to course
 //        send mailing? about account creation and course welcome
     }
 
-    Set<Lecture> createLecturesByCourse(final CourseDTO course)
+    String wrapDaysIntoString(Set<Integer> days)
     {
-//        creating lectures by course data
-//        -start date
-//        -days with lectures
-//        -amount of lectures
+//        TODO temporary solution only as too sensitive
 
-//        pierwsza lekcja tworzy się na podstawie daty startowej
-//        następne - dzień tygodnia daty startowej przejście do następnego dnia zajęć i ustalenie daty
-//        np zajęcia poniedziałek środa (poniedziałek jako pierwszy dzień) ustalenie daty ze środy
+        StringBuilder wrappedDays = new StringBuilder();
 
+        for (int d : days)
+            wrappedDays.append(d);
+
+        return wrappedDays.toString();
+    }
+
+//    metoda unwrap -> rozwinięcie do DayOfWeek
+
+    Set<DayOfWeek> unwrapDaysFromString(final String days)
+    {
+        var unwrappedDays = new HashSet<DayOfWeek>();
+
+        for(int i = 0; i < days.length(); i++)
+            unwrappedDays.add(DayOfWeek.of(days.charAt(i)));
+
+        return unwrappedDays;
+    }
+
+    Set<Lecture> createLecturesByCourse(final Course course)
+    {
         var lectures = new HashSet<Lecture>();
 
         var day = course.getStartDate();
@@ -55,19 +77,12 @@ class CourseService
             {
                 day = day.plusDays(1);
 
-//                TODO konwersja
-                if (course.getDays().contains(day.getDayOfWeek()))
+                if (unwrapDaysFromString(course.getDays()).contains(day.getDayOfWeek()))
                 {
-                    lectures.add(new Lecture(day));
+                    lectures.add(new Lecture(day, course));
                     break;
                 }
             }
-
-
-
-//            do daty startowej dodaje się dzień i sprawdza czy taki dzień tygodnia występuje w zestawie dni kursu
-//            jeśli tak to odzyskiwana jest data i na jej podstawie tworzona lekcja
-//            po czym następuje przejście do następnej iteracji i tak aby
         }
 
         for (Lecture l : lectures)

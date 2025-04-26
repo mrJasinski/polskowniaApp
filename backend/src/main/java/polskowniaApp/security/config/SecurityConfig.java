@@ -54,13 +54,13 @@ class SecurityConfig
                         return config;
                     }
                 }))
-                .csrf(csrf -> csrf.csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers("/register", "/authenticate")
+                .csrf(csrf -> csrf.csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers("/register", "/authenticate", "/dashboard", "/createCourse", "/myCourses")
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
                 .addFilterBefore(this.authFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/register", "/authenticate").permitAll()
-                        .requestMatchers("/account").authenticated())
+                        .requestMatchers("/dashboard", "/createCourse", "/myCourses").authenticated())
                 .httpBasic(Customizer.withDefaults());
 
         return http.build();
