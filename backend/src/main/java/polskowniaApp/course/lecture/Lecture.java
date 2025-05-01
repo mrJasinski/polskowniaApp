@@ -25,6 +25,7 @@ public class Lecture
 
     public Lecture(final LocalDate lectureDate, final Course course)
     {
+        this.title = "";
         this.lectureDate = lectureDate;
         this.course = course;
     }

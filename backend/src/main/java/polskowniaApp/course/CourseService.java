@@ -4,9 +4,10 @@ import org.springframework.stereotype.Service;
 import polskowniaApp.course.dto.CourseDTO;
 import polskowniaApp.course.dto.CourseWriteModel;
 import polskowniaApp.course.lecture.Lecture;
+import polskowniaApp.user.UserService;
 
 import java.time.DayOfWeek;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -15,12 +16,14 @@ class CourseService
 {
     private final CourseRepository courseRepo;
     private final LectureRepository lectureRepo;
+    private final UserService userService;
 
 
-    CourseService(final CourseRepository courseRepo, final LectureRepository lectureRepo)
+    CourseService(final CourseRepository courseRepo, final LectureRepository lectureRepo, final UserService userService)
     {
         this.courseRepo = courseRepo;
         this.lectureRepo = lectureRepo;
+        this.userService = userService;
     }
 
     void createCourse(final CourseWriteModel toSave)
@@ -32,11 +35,34 @@ class CourseService
                 , toSave.getLength()
                 , toSave.getDuration()));
 
-        createLecturesByCourse(course);
+        System.out.println("created course " + course.getId());
+
+        var lectures = createLecturesByCourse(course);
+//jeśli obiekt course jest tylko utworzony a nie wykorzystywnay dalaej w tej metodzie tj np wyświetlany to czy warto dodawać lectures?
+        //powiązanie zostało utworzone w lectures
+//        course.addLectures(lectures);
 //        create course object
 //          create lectures in course
+
+        var emails = toSave.getParticipants();
+
+        if (emails !=  null)
+            for (String email : emails)
+                this.userService.createUserAccountByEmail(email);
+
+//        przypisanie uczniów do kursu
+
+        var userIds = this.userService.getUserIdsByEmails(emails);
+
+        for (int userId : userIds)
+            assignStudentToCourse(userId, course.getId());
 //        create user accounts? unless exist and assign them to course
 //        send mailing? about account creation and course welcome
+    }
+
+    private void assignStudentToCourse(final int userId, final int courseId)
+    {
+        this.courseRepo.assignStudentToCourse(userId, courseId);
     }
 
     String wrapDaysIntoString(Set<Integer> days)
@@ -53,31 +79,73 @@ class CourseService
 
 //    metoda unwrap -> rozwinięcie do DayOfWeek
 
-    Set<DayOfWeek> unwrapDaysFromString(final String days)
+    List<DayOfWeek> unwrapDaysFromString(final String days)
     {
-        var unwrappedDays = new HashSet<DayOfWeek>();
+        var unwrappedDays = new ArrayList<DayOfWeek>();
 
         for(int i = 0; i < days.length(); i++)
-            unwrappedDays.add(DayOfWeek.of(days.charAt(i)));
+        {
+            var x = Integer.parseInt(String.valueOf(days.charAt(i))) + 1;
+            unwrappedDays.add(DayOfWeek.of(x));
+        }
 
         return unwrappedDays;
     }
 
-    Set<Lecture> createLecturesByCourse(final Course course)
+//    List<Lecture> createLectures(final Course course)
+//    {
+//        var lectures = new ArrayList<Lecture>();
+//
+//        var day = course.getStartDate();
+//
+//        lectures.add(new Lecture(day, course));
+//
+//        var courseDays = unwrapDaysFromString(course.getDays());
+//
+//        for (int i = 1; i < course.getLength(); i++)
+//        {
+//            while(0 == 0)
+//            {
+//                day = day.plusDays(1);
+//
+//                if (courseDays.contains(day.getDayOfWeek()))
+//                {
+//                    lectures.add(new Lecture(day, course));
+//                    break;
+//                }
+//            }
+//        }
+//
+//        return lectures;
+//    }
+
+    List<Lecture> createLecturesByCourse(final Course course)
     {
-        var lectures = new HashSet<Lecture>();
+//        założenia
+//        mam datę startową oraz dni tygodnia w których odbywają się zajęcia
+//        data startowa - pokrywa się z jednym z tych dni ->
+//        TODO wyżej check czy dane są porawne
+//        tworzę pierwszą lekcję na podstawie daty startowej
+//        datę drugiej i kolejnych lekcji należy wyznaczyć na podstawie dni tygodnia w które odbywają się zajęcia
+//        np [pon, śr] pierwsze zajęcia w pon
+//        więc należy wyznaczyć datę która wypada w środę utorzyć lekcję
+//        następna lekcja w poniedziałek więc data poniedziałku itd aż do uzyskania wymaganej ilości lekcji
+//        iteracja do ilości - 1 ponieważ pierwsza lekcja była utworzona zawczasu
+
+        var lectures = new ArrayList<Lecture>();
 
         var day = course.getStartDate();
 
-        lectures.add(new Lecture(day));
+        lectures.add(new Lecture(day, course));
 
-        for(int i = 0; i < course.getLength() - 1; i++)
+        var courseDays = unwrapDaysFromString(course.getDays());
+
+        for (int i = 1; i < course.getLength(); i++)
         {
             while(0 == 0)
             {
                 day = day.plusDays(1);
-
-                if (unwrapDaysFromString(course.getDays()).contains(day.getDayOfWeek()))
+                if (courseDays.contains(day.getDayOfWeek()))
                 {
                     lectures.add(new Lecture(day, course));
                     break;
@@ -91,14 +159,14 @@ class CourseService
         return lectures;
     }
 
-    List<Course> getAll()
+    List<Course> getAllCourses()
     {
         return this.courseRepo.findAll();
     }
 
-    List<CourseDTO> getAllAsDto()
+    List<CourseDTO> getAllCoursesAsDto()
     {
-        return getAll()
+        return getAllCourses()
                 .stream()
                 .map(this::toDto)
                 .toList();
@@ -107,7 +175,13 @@ class CourseService
     CourseDTO toDto(final Course course)
     {
 //        TODO konstruktor
-        return new CourseDTO();
+        return new CourseDTO(
+                course.getStartDate()
+                , course.getStartTime()
+                , course.getDaysWithNames()
+                , course.getLength()
+                , course.getDuration()
+        );
     }
 
     List<Course> getCoursesByStatus(CourseStatus status)

@@ -10,6 +10,7 @@ public class ShopItem
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private String refNumber;
     private String title;
     private double price;
     private String description;
@@ -24,8 +25,16 @@ public class ShopItem
     {
     }
 
-    ShopItem(final String title, final double price, final String description, final Category category, final int length, final int duration, final Level level)
+    ShopItem(
+            final String title
+            , final double price
+            , final String description
+            , final Category category
+            , final int length
+            , final int duration
+            , final Level level)
     {
+        this.refNumber = generateRefNumber();
         this.title = title;
         this.price = price;
         this.description = description;
@@ -38,7 +47,8 @@ public class ShopItem
     ShopItemReadModel toReadModel()
     {
         return new ShopItemReadModel(
-                this.title
+                this.refNumber
+                , this.title
                 , this.price
                 , this.description
                 , this.category
@@ -48,6 +58,12 @@ public class ShopItem
         );
     }
 
+    String generateRefNumber()
+    {
+        //TODO how to generate?
+        //skrótowiec kategorii + numer kolejny?
+        return "refNumber";
+    }
 
     public enum Category
     {
@@ -65,7 +81,7 @@ public class ShopItem
             this.name = name;
         }
 
-        String getName()
+        public String getName()
         {
             return this.name;
         }

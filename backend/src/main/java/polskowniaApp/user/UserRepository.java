@@ -1,6 +1,8 @@
 package polskowniaApp.user;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 interface UserRepository
 {
@@ -10,4 +12,6 @@ interface UserRepository
     Optional<User> findByEmail(final String email);
 
     boolean existsByEmail(String email);
+
+    List<Integer> findIdsByEmails(Set<String> emails);
 }

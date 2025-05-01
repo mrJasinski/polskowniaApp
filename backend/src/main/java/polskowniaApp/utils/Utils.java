@@ -1,5 +1,6 @@
 package polskowniaApp.utils;
 
-class Utils
+public class Utils
 {
+    public static final String APP_MAIL = "moneyAppMain@gmail.com";
 }

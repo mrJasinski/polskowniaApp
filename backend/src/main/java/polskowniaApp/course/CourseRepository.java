@@ -9,4 +9,6 @@ interface CourseRepository
     List<Course> findByUserId(int userId);
 
     Course save(Course toSave);
+
+    void assignStudentToCourse(int userId, int courseId);
 }

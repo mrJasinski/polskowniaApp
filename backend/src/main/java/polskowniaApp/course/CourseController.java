@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import polskowniaApp.course.dto.CourseDTO;
 import polskowniaApp.course.dto.CourseWriteModel;
 import polskowniaApp.security.JwtService;
 
@@ -34,7 +33,7 @@ class CourseController
     @GetMapping("/allCourses")
     ResponseEntity<?> getAllCoursesAsDto()
     {
-        return ResponseEntity.ok(this.courseService.getAllAsDto());
+        return ResponseEntity.ok(this.courseService.getAllCoursesAsDto());
     }
 
     @GetMapping("/ongoingCourses")

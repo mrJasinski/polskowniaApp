@@ -7,6 +7,10 @@ import polskowniaApp.user.User;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.TextStyle;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 @Entity
@@ -44,6 +48,26 @@ public class Course
 
     //    materials - materiały zamieszczane przez naczyciela oraz prace przesyłane przez użytkowników oraz potem sprawdzone przez nauczyciela
 
+    List<String> getDaysWithNames()
+    {
+        var locale = new Locale("pl", "PL");
+
+        var daysWithNames = new ArrayList<String>();
+
+        for(int i = 0; i < days.length(); i++)
+        {
+            var x = Integer.parseInt(String.valueOf(days.charAt(i))) + 1;
+
+            var day = DayOfWeek.of(x).getDisplayName(TextStyle.FULL, locale);
+
+            day = day.substring(0, 1).toUpperCase() + day.substring(1);
+
+            daysWithNames.add(day);
+        }
+
+        return daysWithNames;
+    }
+
 
     int getId()
     {
@@ -74,4 +98,11 @@ public class Course
     {
         return this.duration;
     }
+
+    void addLectures(final Set<Lecture> lectures)
+    {
+        this.lectures = lectures;
+    }
+
+
 }
