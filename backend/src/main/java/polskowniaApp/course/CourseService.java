@@ -2,13 +2,16 @@ package polskowniaApp.course;
 
 import org.springframework.stereotype.Service;
 import polskowniaApp.course.dto.CourseDTO;
+import polskowniaApp.course.dto.CourseReadModel;
 import polskowniaApp.course.dto.CourseWriteModel;
 import polskowniaApp.course.lecture.Lecture;
+import polskowniaApp.course.lecture.LectureReadModel;
 import polskowniaApp.user.UserService;
 
 import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 @Service
@@ -64,6 +67,8 @@ class CourseService
     {
         this.courseRepo.assignStudentToCourse(userId, courseId);
     }
+
+        // wrappery w obiekcie?
 
     String wrapDaysIntoString(Set<Integer> days)
     {
@@ -164,11 +169,11 @@ class CourseService
         return this.courseRepo.findAll();
     }
 
-    List<CourseDTO> getAllCoursesAsDto()
+    List<CourseReadModel> getAllCoursesAsReadModel()
     {
         return getAllCourses()
                 .stream()
-                .map(this::toDto)
+                .map(this::toReadModel)
                 .toList();
     }
 
@@ -202,11 +207,47 @@ class CourseService
         return this.courseRepo.findByUserId(userId);
     }
 
-    List<CourseDTO> getCoursesByUserIdAsDto(final int userId)
+    List<CourseReadModel> getCoursesByUserIdAsReadModel(final int userId)
     {
         return getCoursesByUserId(userId)
                 .stream()
-                .map(this::toDto)
+                .map(this::toReadModel)
                 .toList();
+    }
+
+    Course getCourseByRefNumber(final String courseRefNumber)
+    {
+        return this.courseRepo.findByRefNumber(courseRefNumber)
+                .orElseThrow(() -> new NoSuchElementException("No course with given ref number found!"));
+    }
+
+    LectureReadModel toReadModel(final Lecture lecture)
+    {
+        return new LectureReadModel(
+                lecture.getLectureDate()
+                , lecture.getTitle()
+        );
+    }
+
+    CourseReadModel toReadModel(final Course course)
+    {
+        return new CourseReadModel(
+                course.getRefNumber()
+                , course.getTitle()
+                , course.getLevel()
+                , course.getCategory().getName()
+                , course.getStartDate()
+                , course.getStartTime()
+                , course.getDaysWithNames()
+                , course.getLength()
+                , course.getDuration()
+                , course.getStatus().getName()
+                , course.getLectures().stream().map(this::toReadModel).toList()
+        );
+    }
+
+    CourseReadModel getCourseByRefNumberAsReadModel(final String courseRefNumber)
+    {
+        return toReadModel(getCourseByRefNumber(courseRefNumber));
     }
 }

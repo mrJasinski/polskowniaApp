@@ -55,13 +55,14 @@ class SecurityConfig
                     }
                 }))
                 .csrf(csrf -> csrf.csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers("/register",
-                                "/authenticate", "/dashboard", "/createCourse", "/myCourses", "/shop", "/getShopItemCategories")
+                                "/authenticate", "/dashboard", "/createCourse", "/myCourses/**", "/allCourses", "/shop", "/getShopItemCategories"
+                        , "/addShopItem/**", "/getShopItem/**")
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
                 .addFilterBefore(this.authFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/register", "/authenticate", "/shop", "/getShopItemCategories").permitAll()
-                        .requestMatchers("/dashboard", "/createCourse", "/myCourses").authenticated())
+                        .requestMatchers("/dashboard", "/createCourse", "/myCourses/**", "/allCourses", "/addShopItem/**", "/getShopItem/**").authenticated())
                 .httpBasic(Customizer.withDefaults());
 
         return http.build();

@@ -1,11 +1,7 @@
 package polskowniaApp.shop.dto;
 
-import polskowniaApp.utils.Category;
-import polskowniaApp.utils.Level;
-
-public class ShopItemReadModel
+public class ShopItemWriteModel
 {
-    private String refNumber;
     private String title;
     private double price;
     private String description;
@@ -14,21 +10,12 @@ public class ShopItemReadModel
     private int duration;
     private String level;
 
-    ShopItemReadModel()
+    ShopItemWriteModel()
     {
     }
 
-    public ShopItemReadModel(
-            final String refNumber
-            ,final String title
-            , final double price
-            , final String description
-            , final String category
-            , final int length
-            , final int duration
-            , final String level)
+    ShopItemWriteModel(final String title, final double price, final String description, final String category, final int length, final int duration, final String level)
     {
-        this.refNumber = refNumber;
         this.title = title;
         this.price = price;
         this.description = description;
@@ -36,11 +23,6 @@ public class ShopItemReadModel
         this.length = length;
         this.duration = duration;
         this.level = level;
-    }
-
-    public String getRefNumber()
-    {
-        return this.refNumber;
     }
 
     public String getTitle()

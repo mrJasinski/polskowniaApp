@@ -2,6 +2,11 @@ package polskowniaApp.shop;
 
 import jakarta.persistence.*;
 import polskowniaApp.shop.dto.ShopItemReadModel;
+import polskowniaApp.utils.Category;
+import polskowniaApp.utils.Level;
+
+import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 @Table(name = "shop_items")
@@ -34,7 +39,7 @@ public class ShopItem
             , final int duration
             , final Level level)
     {
-        this.refNumber = generateRefNumber();
+        this.refNumber = generateRefNumber(category.getAcronym(), level.name());
         this.title = title;
         this.price = price;
         this.description = description;
@@ -51,51 +56,18 @@ public class ShopItem
                 , this.title
                 , this.price
                 , this.description
-                , this.category
+                , this.category.getName()
                 , this.length
                 , this.duration
-                , this.level
+                , this.level.toString()
         );
     }
 
-    String generateRefNumber()
+    String generateRefNumber(final String acronym , final String level)
     {
-        //TODO how to generate?
-        //skrótowiec kategorii + numer kolejny?
-        return "refNumber";
+        var dt = LocalDateTime.now();
+        var timestamp = String.format("%s%s%s%s%s%s%s", dt.getYear(), dt.getMonthValue(), dt.getDayOfMonth(), dt.getHour(), dt.getMinute(), dt.getSecond(), dt.getNano());
+
+        return acronym + "_" + level + "_" + timestamp;
     }
-
-    public enum Category
-    {
-        COURSE_INDIVIDUAL("Kurs indywidualny")
-        , COURSE_GROUP("Kurs grupowy")
-        , EXAM_SIMULATION("Symulacja egzaminu")
-        , BOOK("Książka")
-        , EBOOK("Ebook")
-        , EXERCISE_SHEET("Arkusz ćwiczeń");
-
-        private final String name;
-
-        Category(final String name)
-        {
-            this.name = name;
-        }
-
-        public String getName()
-        {
-            return this.name;
-        }
-    }
-
-    public enum Level
-    {
-        A0
-        , A1
-        , A2
-        , B1
-        , B2
-        , C1
-        , C2
-    }
-
 }

@@ -2,7 +2,8 @@ package polskowniaApp.course;
 
 import jakarta.persistence.*;
 import polskowniaApp.course.lecture.Lecture;
-import polskowniaApp.user.User;
+import polskowniaApp.utils.Category;
+import polskowniaApp.utils.Level;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -20,6 +21,12 @@ public class Course
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private String refNumber;
+    private String title;
+    @Enumerated(EnumType.STRING)
+    private Level level;
+    @Enumerated(EnumType.STRING)
+    private Category category;
     private LocalDate startDate;
     private LocalTime startTime;    // lecture start time
     private String days;   //weekdays when lectures are
@@ -46,7 +53,33 @@ public class Course
         this.status = CourseStatus.CREATED;
     }
 
+    Course(final String title, final Level level, final Category category, final LocalDate startDate, final LocalTime startTime, final String days, final int length, final int duration)
+    {
+        this.refNumber = generateRefNumber(category.getAcronym(), level, startDate, startTime);
+        this.title = title;
+        this.level = level;
+        this.category = category;
+        this.startDate = startDate;
+        this.startTime = startTime;
+        this.days = days;
+        this.length = length;
+        this.duration = duration;
+        this.status = CourseStatus.CREATED;
+    }
+
     //    materials - materiały zamieszczane przez naczyciela oraz prace przesyłane przez użytkowników oraz potem sprawdzone przez nauczyciela
+
+    String generateRefNumber(final String acronym, final Level level, final LocalDate startDate, final LocalTime startTime)
+    {
+        var startDateTimeString = String.format("%s%s%s%s%s"
+                , startDate.getYear()
+                , startDate.getMonthValue()
+                , startDate.getDayOfMonth()
+                , startTime.getHour()
+                , startTime.getMinute());
+
+        return acronym + "_" + level + "_" + startDateTimeString;
+    }
 
     List<String> getDaysWithNames()
     {
@@ -68,10 +101,34 @@ public class Course
         return daysWithNames;
     }
 
+    void addLectures(final Set<Lecture> lectures)
+    {
+        this.lectures = lectures;
+    }
 
     int getId()
     {
         return this.id;
+    }
+
+    String getRefNumber()
+    {
+        return this.refNumber;
+    }
+
+    String getTitle()
+    {
+        return this.title;
+    }
+
+    Level getLevel()
+    {
+        return this.level;
+    }
+
+    Category getCategory()
+    {
+        return this.category;
     }
 
     LocalDate getStartDate()
@@ -99,10 +156,13 @@ public class Course
         return this.duration;
     }
 
-    void addLectures(final Set<Lecture> lectures)
+    CourseStatus getStatus()
     {
-        this.lectures = lectures;
+        return this.status;
     }
 
-
+    Set<Lecture> getLectures()
+    {
+        return this.lectures;
+    }
 }

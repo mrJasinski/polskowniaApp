@@ -18,9 +18,8 @@ public class Lecture
     @JoinColumn(name = "course_id")
     private Course course;
 
-    public Lecture(final LocalDate lectureDate)
+    public Lecture()
     {
-        this.lectureDate = lectureDate;
     }
 
     public Lecture(final LocalDate lectureDate, final Course course)
