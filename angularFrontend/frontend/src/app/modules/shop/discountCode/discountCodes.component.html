@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+
+        
+        <form #codeAddForm = "ngForm" (ngSubmit) = "onSubmit(codeAddForm)" style="width: 80%; margin: auto; text-align: center;">
+
+            <h3>Dodawanie kodów rabatowych</h3>
+
+            <div class="form-group" >
+                <label for = "code" >Kod: </label>
+                <input type = "code" autocomplete="off" class = "form-control" ngModel name = "code" required />
+            </div>
+
+            <div class="form-group" >
+                <label for = "value" >Wartość: </label>
+                <input type = "number" autocomplete="off" class = "form-control" ngModel name = "value" required />
+            </div>
+
+            <div class="form-group" >
+                <label for = "type" >Rodzaj: </label>
+                <input type = "radio" value = "PLN" class = "form-control" ngModel name = "type" required />
+                <span>PLN</span>
+                <input type = "radio" value = "%" class = "form-control" ngModel name = "type" required />
+                <span>%</span>
+            </div>
+<!-- ograniczenie daty startowej - min dziś -->
+            <mat-form-field class = "form-group">
+                <mat-label>Data startowa: </mat-label>
+                <input matInput [matDatepicker]="startDatePicker" ngModel name="startDatePicker" (dateChange)="onStartDateChange($event)" date />
+                <mat-datepicker-toggle matIconSuffix [for]="startDatePicker" ></mat-datepicker-toggle>
+                <mat-datepicker #startDatePicker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field class = "form-group">
+                <mat-label>Data końcowa: </mat-label>
+                <input matInput [matDatepicker]="endDatePicker" ngModel name="endDatePicker" (dateChange)="onEndDateChange($event)" date />
+                <mat-datepicker-toggle matIconSuffix [for]="endDatePicker" ></mat-datepicker-toggle>
+                <mat-datepicker #endDatePicker></mat-datepicker>
+            </mat-form-field>
+
+            <div>
+                <button class="btn btn-primary" type="submit" [disabled]="!codeAddForm.valid">Generuj</button> | 
+                <button class="btn btn-primary" type="reset">Reset</button>
+            </div>
+
+            <div *ngIf = "responseStatus == 201">
+                <h2 style="color: green;">Kod został utworzony!</h2>
+            </div>
+
+        </form>
+
+    </div>
+
+    <div>
+        <h3>lista kodów rabatowych - aktualnych i archiwalnych</h3>
+
+        <tr>
+            <th>Kod</th>
+            <th>Wartość</th>
+            <th>Typ</th>
+            <th>Data początkowa</th>
+            <th>Data końcowa</th>
+            <th>Status</th>
+        </tr>
+
+        <tr *ngFor = "let code of codes">
+            <td>{{code.code}}</td>
+            <td>{{code.value}}</td>
+            <td>{{code.type}}</td>
+            <td>{{code.startDate}}</td>
+            <td>{{code.endDate}}</td>
+            <td>{{code.status}}</td>
+        </tr>
+    </div>
+    
+</body>
+</html>

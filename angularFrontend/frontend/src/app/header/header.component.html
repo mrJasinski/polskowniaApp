@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #mainMenu
+        {
+            display: flex;
+            flex-direction: row;
+            margin: auto;
+            width: 50%;
+        }
+
+        #mainMenuButton
+        {
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+
+        #header
+        {
+          text-align: center;
+          margin: auto;
+        }
+
+        li
+        {
+          margin-left: 20px;
+          margin-right: 20px;
+        }
+
+    </style>
+</head>
+<body id="header">
+    <h1>Polskownia!</h1>
+
+    <div style="float: right; margin-right: 20px;">
+      <p *ngIf="isAuthenticated">{{userName}}</p>
+      <button *ngIf="isAuthenticated" style="cursor: pointer;" (click)="onLogout()">Wyloguj</button>
+    </div>
+
+    <div>
+      <ul id="mainMenu">
+        <li>
+          <a routerLink="" >Home</a>
+        </li>
+        <li>
+          <a routerLink="/aboutMe" >O mnie</a>
+        </li>
+        <li>
+          <a routerLink="/shop" >Sklep</a>
+        </li>
+        <li>
+          <a routerLink="/cart">Koszyk</a>
+        </li>
+        <li *ngIf="isAuthenticated">
+          <a routerLink="/games">Gry</a>
+        </li>
+        <li>
+          <a [routerLink] = '[isAuthenticated ? "/dashboard" : "/authenticate"]'>Konto</a>
+        </li>
+        <li>
+          <a routerLink="/contact" >Kontakt</a>
+        </li>
+        <li>
+          <a routerLink="/relatedLinks" >Polecane linki</a>  
+        </li>
+      </ul>
+    </div>
+</body>
+</html>

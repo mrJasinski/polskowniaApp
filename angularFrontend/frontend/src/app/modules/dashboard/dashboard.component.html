@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="margin: auto; width: 95%;">
+    <dashboard-nav-bar></dashboard-nav-bar>
+    <div>
+        <div *ngIf = "userRole == uR.LECTURER">
+            <lecturer-dashboard></lecturer-dashboard>
+        </div>  
+        
+        <div *ngIf = "userRole == uR.STUDENT">
+            <student-dashboard></student-dashboard>
+        </div> 
+    </div>
+</body>
+</html>

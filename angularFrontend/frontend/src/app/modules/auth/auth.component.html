@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth</title>
+
+    <style>
+        input.ng-invalid.ng-touched
+        {
+            border: 1px solid red;
+        }
+    </style>
+
+</head>
+<body>
+    <form [formGroup] = "authForm" (ngSubmit)="onSubmit()" style="width: 80%; text-align: center; margin: auto;">
+
+        <h2>{{isLoginMode ? 'Logowanie' : 'Rejestracja'}}</h2>
+
+        <div class="form_group">
+            <label for="email">E-mail: </label>
+            <input type="email" formControlName = "email" class="form-control" />
+            <span *ngIf = "!authForm.get('email').valid && authForm.get('email').touched" class="help-block">Proszę podać prawidłowy email</span>
+        </div>
+
+        <!-- sprawdzenie czy hasła się zgadzają -->
+    
+        <div class="form-group">
+            <label for="password">Hasło: </label>
+            <input type="password" class="form-control" ngModel name="password" required minlength="8" #password = "ngModel" />
+        </div>
+
+        <div class="form-group" *ngIf = "!isLoginMode">
+            <label for="confirmPassword">Powtórz hasło: </label>
+            <input type="confirmPassword" class="form-control" ngModel name="confirmPassword" required minlength="8" #confirmPassword = "ngModel" />
+        </div>
+
+
+        <div class="form-group" *ngIf = "!isLoginMode">
+            <label for="name">Imię: </label>
+            <input type="name" id="name" class="form-control" ngModel name="name" required />
+        </div>
+    
+        <div>
+            <button class="btn btn-primary" type="submit" [disabled]="!authForm.valid">{{isLoginMode ? 'Zaloguj' : 'Zarejestruj'}}</button> | 
+            <!-- czy użytkownik może się sam zarejestrować? -->
+            <button class="btn btn-primary" type="button" (click)="onSwitchMode()">Przełącz na {{isLoginMode ? 'rejestrecję' : 'logowanie'}}</button> |
+            <button class="btn btn-primary" type="reset">Reset</button> |
+            <button class="btn btn-primary" type="button" (click)="onForgottenPassword()">Przypomnij hasło</button>
+            <!-- przypomnienie hasła wymaga 2FA? -->
+        </div>
+
+    </form>
+
+</body>
+</html>

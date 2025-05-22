@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        li 
+        {
+            list-style-type: none;
+        }
+    </style>
+</head>
+<body>
+    <form #courseCreateForm="ngForm" (ngSubmit)="onSubmit(courseCreateForm)" style="width: 80%; text-align: center; margin: auto;">
+
+        <mat-form-field class = "form-group">
+            <mat-label>Data rozpoczęcia kursu: </mat-label>
+            <input matInput [matDatepicker]="datePicker" ngModel name="datePicker"  (dateChange)="onDateChange($event)" date />
+            <mat-datepicker-toggle matIconSuffix [for]="datePicker" ></mat-datepicker-toggle>
+            <mat-datepicker #datePicker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Godzina rozpoczęcia zajęć:</mat-label>
+            <input matInput [matTimepicker]="timePicker" ngModel name="timePicker" required time />
+            <mat-timepicker-toggle matIconSuffix [for]="timePicker"/>
+            <mat-timepicker interval="15m" #timePicker/>
+        </mat-form-field>
+                    
+        <!-- <div class="form_group">
+            <label for="startTime">Godzina rozpoczęcia zajęć: </label>
+            <input type="startTime" id="startTime" class="form-control" ngModel name="startTime" required/> 
+        </div> -->
+
+        <!-- dodać pola do wpisu title level category (combo?) -->
+
+        <div class="form_group">
+            <label for="days">Dni tygodnia, w które odbywają się zajęcia: </label>
+            <div *ngFor = "let weekday of weekdays" style="text-align: left;">
+                <!-- dlaczego domyślnie są zaznaczone? -->
+                 <input type="checkbox" name="weekday" [value]="weekday" [ngModel]="false" (change)="onSelection($event)" required/>{{weekday}}
+            </div>
+        </div>
+        <div class="form_group">
+            <label for="length">Ilość jednostek lekcyjnych kursu: </label>
+            <input type="number" id="length" class="form-control" ngModel name="length" required number/> 
+        </div>
+
+        <div class="form_group">
+            <label for="duration">Długość trwania zajęć [min]: </label>
+            <!-- <input type="" id="duration" class="form-control" ngModel name="duration" required number/>  -->
+             <select>
+                <option>Wybierz</option>
+                <option *ngFor="let time of durationTimes" (click) = onSelectDuration($event)>{{time}}</option>
+             </select>
+        </div>
+
+        <div class="form_group">
+            <label for="participants">Adresy e-mail uczestników: </label>
+            <!-- dla testów usunięty wymóg required -->
+            <!-- <input type="participants" id="participants" class="form-control" ngModel name="participants" required/>  -->
+            <!-- <input type="participants" id="participants" class="form-control" ngModel name="participants"/> -->
+            <textarea ng-model="list" ng-list="&#10;" ng-trim="false" id="participants" class="form-control" ngModel name="participants"></textarea>
+        </div>
+
+        <!-- mailing i tworzenie kont -> backend-->
+
+        <div>
+            <button class="btn btn-primary" type="submit">Dodaj kurs</button> | 
+            <!-- <button class="btn btn-primary" type="submit" [disabled]="!courseCreateForm.valid">Dodaj kurs</button> |  -->
+            <button class="btn btn-primary" type="reset">Reset</button>
+        </div>
+       
+    </form>
+</body>
+</html>

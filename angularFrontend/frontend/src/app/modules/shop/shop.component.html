@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="margin: auto; width: 80%;">
+
+
+    <!-- przycisk przejścia do koszyka? -->
+    
+    <div *ngIf="userRole == uR.LECTURER" >
+        <p>panel admina/nauczyciela -> dodawanie/usuwanie/edycja pozycji (usuwanie i edycja przycisk przy pozycji) </p>
+        <button (click) = "onAddShopItem()">Dodaj pozycję</button> ||  
+        <button (click) = "onManageDiscountCodes()" > Zarządzaj kodami rabatowymi</button>
+    </div>
+
+    <div>
+        <button routerLink = "/cart" >Przejdź do koszyka</button>
+        <p>sortuj wg xxx</p>
+        <p>pokaż na stronę</p>
+    </div>
+
+    <div style="float: inline-start; margin-right: 10px;">
+        <h3>Kategorie: </h3>
+        <tr  *ngFor = "let category of categories">
+            <input type="checkbox" [value]="category" (change) = "onSelection($event)" >{{category}}
+        </tr>
+        <h3>Poziom: </h3>
+        <!-- filtr po poziomie i czy uwzględniać poziomy pośrednie np B1/B2?-->
+    </div>
+
+    <div style="display: inline-block;">
+        <tr *ngFor = "let item of filteredShopItems">
+            <td>
+                <h3>{{item.title}}</h3>
+                <p>Cena {{item.price}} PLN</p>
+                <p>{{item.description}}</p>
+                <p>{{item.category}}</p>
+            </td>
+            <td>
+                <button (click) = "onAddToCart(item)">Dodaj do koszyka</button>
+                <button>Dodaj do listy życzeń</button>
+            </td>
+            <td *ngIf = 'userRole == uR.LECTURER'>
+                <button (click) = "onEditShopItem(item.refNumber)" >Edytuj</button>
+            </td>
+            <td *ngIf = 'userRole == uR.LECTURER'>
+                <button (click) = "onDeleteShopItem()">Usuń</button>
+            </td>
+        </tr>
+    </div>
+</body>
+</html>

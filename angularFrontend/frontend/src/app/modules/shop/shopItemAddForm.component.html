@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form #shopItemAddForm = "ngForm" (ngSubmit) = "onSubmit(shopItemAddForm)" style="width: 80%; margin: auto; text-align: center;">
+
+        <div class="form-group" >
+            <label for = "title" >Tytuł: </label>
+            <input type = "title" class = "form-control" ngModel name = "title" required />
+        </div>
+
+        <div class="form-group" >
+            <label for = "price" >Cena [PLN]: </label>
+            <input type = "number" step="0.01" min = "0" class = "form-control" ngModel name = "price" required />
+        </div>
+
+        <div class="form-group" >
+            <label for = "description" >Opis: </label>
+            <textarea type = "description" class = "form-control" ngModel name = "description" required ></textarea>
+        </div>
+        
+        <div class="form-group" >
+            <label for = "category" >Kategoria: </label>
+            <select class = "form-control" ngModel name = "category">
+                <option>Wybierz</option>
+                <option *ngFor="let category of categories"  (click) = "onCategorySelection($event)" required >{{category}}</option>
+             </select>
+        </div>
+<!-- ilośc i czas trwania zajęć tylko dla kursów/symulacji mówionych etc dla pozostałych 0 lub null -->
+        <div class="form-group">
+            <label for = "length" >Ilość zajęć: </label>
+            <input type = "number" min = "0" class = "form-control" ngModel name = "length" />
+        </div>
+
+        <div class="form-group" >
+            <label for = "duration" >Czas trwania zajęć [min]: </label>
+            <input type = "number" step="5" min = "0" class = "form-control" ngModel name = "duration" />
+        </div>
+
+        <div class="form-group" >
+            <label for = "level" >Poziom: </label>
+            <select class = "form-control" ngModel name = "level">
+                <option>Wybierz</option>
+                <option *ngFor="let level of levels" (click) = "onLevelSelection($event)" required >{{level}}</option>
+             </select>
+        </div>
+
+        <div>
+            <button class="btn btn-primary" type="submit" [disabled]="!shopItemAddForm.valid">{{isUpdate ? 'Aktualizuj' : 'Dodaj'}}</button> | 
+            <button class="btn btn-primary" type="reset">Reset</button>
+        </div>
+
+    </form>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        li
+        {
+            list-style: none;
+        }
+    </style>
+</head>
+<body style="width: 80%; margin: auto; font-size: large;" >
+    <!-- a może wynieśc to do koszyka? -->
+     <div>
+        <button>Powrót do koszyka</button>
+     </div>
+    <form #orderForm = "ngForm" (ngSubmit) = "onSubmit(orderForm)">
+        <div style="float: left; width: 50%; margin: auto">
+        <div>
+            <h2>Dane zamawiającego</h2>
+            <!-- adres jeśli materiały fizyczne? -->
+             <!-- ew jesli faktura -->
+    
+             <form #customerDataForm = "ngForm" style="text-align: left;">
+
+                <input type="checkbox" (change)="selectInvoice($event)" >Faktura
+                <input type="checkbox">Inne dane do faktury
+                    
+                <div class="form-group" >
+                    <label for = "firstName" >Imię: </label>
+                    <input type = "firstName" class = "form-control" ngModel name = "firstName" required />
+                </div>
+    
+                <div class="form-group" >
+                    <label for = "lastName" >Nazwisko: </label>
+                    <input type = "lastName" class = "form-control" ngModel name = "lastName" required />
+                </div>
+            <!-- nazwa i nip jako opcja tylko do faktury -->
+                <div class="form-group" *ngIf = "isInvoice">
+                    <label for = "company" >Nazwa firmy: </label>
+                    <input type = "company" class = "form-control" ngModel name = "company" />
+                </div>
+    
+                <div class="form-group" *ngIf = "isInvoice" >
+                    <label for = "taxNumber" >NIP: </label>
+                    <input type = "taxNumber" class = "form-control" ngModel name = "taxNumber" />
+                </div>
+    
+                <div class="form-group" >
+                    <label for = "streetName" >Ulica: </label>
+                    <input type = "streetName" class = "form-control" ngModel name = "streetName" required />
+                </div>
+    
+                <div class="form-group" >
+                    <label for = "streetNumber" >Numer budynku: </label>
+                    <input type = "streetNumber" class = "form-control" ngModel name = "streetNumber" required />
+                </div>
+                <!-- numer lokalu -->
+                <div class="form-group" >
+                    <label for = "localNumber" >Numer lokalu: </label>
+                    <input type = "localNumber" class = "form-control" ngModel name = "localNumber" />
+                </div>
+    
+                <div class="form-group" >
+                    <label for = "zipCode" >Kod pocztowy: </label>
+                    <input type = "zipCode" class = "form-control" ngModel name = "zipCode" required />
+                </div>
+    
+                <div class="form-group" >
+                    <label for = "town" >Miejscowość: </label>
+                    <input type = "town" class = "form-control" ngModel name = "town" required />
+                </div>
+    
+                <div class="form-group" >
+                    <label for = "phone" >Telefon: </label>
+                    <input type = "phone" class = "form-control" ngModel name = "phone" required />
+                </div>
+    
+                <div class="form-group" >
+                    <label for = "phone" >E - mail: </label>
+                    <input type = "phone" class = "form-control" ngModel name = "phone" required />
+                </div>
+    
+            </form>
+        </div>
+        <div>
+            <h2>Forma płatności</h2>
+            <li *ngFor = "let pm of paymentMethods">
+                <input type = "radio" value = {{pm}} name = "type" required />
+                    <span>{{pm}}</span>
+            </li>
+        </div>
+        <div>
+            <!-- tylko dostępne dla danej formy - przedpłata/pobranie -->
+            <h2>Forma dostawy - jeśli materiały fizyczne - radio</h2>
+            
+            <input type="checkbox">Inny adres wysyłki
+            <!-- zwiększenie odstępu -->
+            
+            <tr *ngFor = "let dm of deliveryMethods">
+                <td>
+                    <input type = "radio" value = {{dm.name}} name = "type" required />
+                    <span>{{dm.name}}</span>
+                </td>
+                <td>{{dm.price}}</td>
+            </tr>
+          
+        </div>
+        
+        <div>
+            <label for = "comment" >Uwagi do zamówienia: </label>
+            <textarea style="width: 20%;" type = "comment" class = "form-control" ngModel name = "comment" ></textarea>
+        </div>
+        
+    </div>
+        
+    
+    <div>
+        <div>
+            <h2>Zawartość koszyka</h2>
+            <tr>
+                <th>Pozycja</th>
+                <th>Wartość [PLN]</th>
+            </tr>
+            <tr *ngFor = " let item of shopItems">
+                <td>{{item.title}}</td>
+                <td style="text-align: right;">{{item.price}}</td>
+            </tr>
+        </div>
+        <div>
+            <h2>Kod rabatowy</h2>
+            <form #discountForm = "ngForm" (ngSubmit) = "applyDiscount(discountForm)">
+                <div>
+                    <label for = "discountCode" >Kod rabatowy: </label>
+                    <input type = "discountCode" class = "form-control" ngModel name = "discountCode" />
+                </div>
+                <div>
+                    <button class="btn btn-primary" type="submit" >Zastosuj</button>
+                </div>
+                <div *ngIf = "discountValue > 0">
+                    <p>Kod rabatowy zastosowany!</p>
+                </div>
+            </form>
+        </div>
+        <div>
+            <h2>Podsumowanie</h2>
+        
+            <tr>
+                <td>Wartość koszyka: </td>
+                <td>{{cartSum}}</td>
+                <td> [PLN]</td>
+            </tr>
+            <tr>
+                <td>Koszt dostawy: </td>
+                <td>{{deliveryPrice}}</td>
+                <td> [PLN]</td>
+            </tr>
+            <tr>
+                <td>Rabat: </td>
+                <td>{{discountValue}}</td>
+                <td> [PLN]</td>
+            </tr>
+            <tr>
+                <td>Kwota do zapłaty: </td>
+                <td>{{checkout}}</td>
+                <td>[PLN]</td>
+            </tr>
+
+        </div>
+        <div>
+            <input type="checkbox"> Akceptuję regulamin sklepu i potwierdzam zapoznanie się z jego treścią
+            <input type="checkbox">Wyrażam zgodę na udostępnienie treści cyfrowych natychmiastowo i zrzekam się prawa do 14 dniowego okresu odstąpienia od umowy
+            <!-- dlaczego disabled nie działa? -->
+            <button class="btn btn-primary" type="submit" [disabled]="!orderForm.valid">Potwierdź zamówienie i przejdź do płatności</button>
+        </div>
+    </div>
+    </form>
+</body>
+</html>

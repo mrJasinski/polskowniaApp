@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <dashboard-nav-bar></dashboard-nav-bar>
+        <p>Panel zarządzania plikami</p>
+    </div>
+
+    <div>
+        <p>Dodawanie pliku: </p>
+            <input type = "file" name = "uploadedFile" (change)="onFileSelected($event)">
+            <button (click)="onUpload()" >Dodaj plik</button>
+    </div>
+    <div>
+        <p>Wszystkie pliki:</p>
+        <tr *ngFor = " let file of fileList">
+            <td>{{file.name}}</td>
+            <td>{{file.format}}</td>
+            <td>{{file.size}}</td>
+        </tr>
+    </div>
+
+</body>
+</html>

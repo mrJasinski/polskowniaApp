@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="margin: auto; width: 80%;">
+
+    <h2>Koszyk</h2>
+
+    <div>
+        <button routerLink="/shop" >Wróć do sklepu</button> | 
+        <button routerLink = "/cartSummary">Przejdź do podsumowania</button>
+    </div>
+
+    <h3>Zawartość koszyka:</h3>
+    
+    <table>
+        <tr>
+            <th>Pozycja:</th>
+            <th>Wartość koszyka: {{sum}} PLN</th>
+        </tr>
+        <tr *ngFor = "let item of shopItems">
+            <td>{{item.title}}</td>
+            <td>{{item.price}} PLN</td>
+            <td> - Ilość + </td>
+            <td>
+                <button (click) = "onDeleteFromCart(item)">Usuń z koszyka</button>
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>

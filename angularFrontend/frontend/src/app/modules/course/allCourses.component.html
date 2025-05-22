@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <dashboard-nav-bar></dashboard-nav-bar>
+    <table style="border-spacing: 10px;">
+        <tr>
+            <th>Numer ref</th>
+            <th>Tytuł</th>
+            <th>Poziom</th>
+            <th>Kategoria</th>
+            <th>Data rozpoczęcia</th>
+            <th>Czas rozpoczęcia</th>
+            <th>Dni zajęć</th>
+            <th>Ilość zajęć</th>
+            <th>Czas trwania lekcji [min]</th>
+            <th>Status</th>
+            <th>Ilość uczestników</th>
+        </tr>
+        <tr *ngFor = "let course of courses">
+            <td>
+                <!-- przekierowanie do widoku kursu nauczyciela -->
+                <a routerLink = '/myCourses/{{course.refNumber}}' (click) = "onClick(course.refNumber)">{{course.refNumber}}</a>
+            </td>
+            <td>{{course.title}}</td>
+            <td>{{course.level}}</td>
+            <td>{{course.category}}</td>
+            <td>{{course.startDate}}</td>
+            <td>{{course.startTime}}</td>
+            <td>{{course.days}}</td>
+            <td>{{course.length}}</td>
+            <td>{{course.duration}}</td>
+            <td>{{course.status}}</td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <dashboard-nav-bar></dashboard-nav-bar>
+    <div style="display: inline-block;">
+        <p>{{course.refNumber}}</p>
+        <p>{{course.title}}</p>
+        <tr *ngFor = "let lecture of course.lectures">
+            <td>{{lecture.lectureDate}}</td>
+            <td>{{lecture.title}}</td>
+        </tr>
+    </div>
+    <div style="float: right; margin-right: 100px;">
+        <h3>Zadania:</h3>
+        <button>Dodaj zadanie</button>
+        <p>zadanie + deadline</p>
+    </div>
+</body>
+</html>

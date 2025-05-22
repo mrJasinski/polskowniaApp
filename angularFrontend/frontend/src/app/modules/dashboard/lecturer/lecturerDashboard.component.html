@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body >
+    <div *ngIf = "isCourseCreation == false" style="margin: auto; text-align: center;">
+        <h1>Wioletka się zalogowała!</h1>
+        <h2>Siatka kursów</h2>
+        <div>
+            <button (click)="onCreateCourse()">Dodaj kurs</button>
+        </div>
+    </div>
+
+    <div *ngIf = "isCourseCreation == true" >
+        <div style="float: left; text-align: center; width: 50%;">
+            <h1>Wioletka się zalogowała!</h1>
+            <h2>Siatka kursów</h2>
+            <div>
+                <button (click)="onCreateCourse()">Dodaj kurs</button>
+            </div>
+        </div>
+        <div style="float: right; width: 50%; text-align: center;">
+            <p>Tworzenie nowego kursu:</p>
+            <course-add-form ></course-add-form>
+        </div>
+    </div>
+</body>
+</html>

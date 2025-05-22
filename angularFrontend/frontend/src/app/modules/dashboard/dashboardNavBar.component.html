@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div  style="float: left; margin-left: 10px; width: 100px;">
+        <p>panel boczny</p>
+
+        <div>
+            <a  *ngIf = "userRole == uR.LECTURER" routerLink="/allCourses">Kursy</a>
+            <a  *ngIf = "userRole == uR.STUDENT" routerLink="/myCourses">Moje kursy</a>  
+        </div>
+
+        <div>
+            <a routerLink = "/orders">Zamówienia</a>
+        </div>
+
+        <div *ngIf = "userRole == uR.LECTURER" >
+            <a routerLink = "/students">Kursanci</a>
+        </div>
+        
+        <div>
+            <!-- zadnia inaczej dla nauczyciela inaczej dla ucznia? -->
+            <a routerLink="/tasks">Zadania</a>
+        </div>
+        <p>Przypominajka o zadaniach do zrobienia</p>
+
+        <div>
+            <!-- ustawienia konta - zmian hasła adresy wysłki etc -->
+            <a >Ustawienia konta</a>
+        </div>
+
+        <div *ngIf = "userRole == uR.STUDENT">
+            <!-- ebooki etc zakupione w sklepie -->
+            <a routerLink="/myShelf" >Moja półka</a>
+        </div>
+
+        <div *ngIf = "userRole == uR.LECTURER">
+            <!-- panel obsługowy ebooków etc nauczyciela -->
+            <a routerLink="/fileManager" >Zarządzanie plikami</a>
+        </div>
+
+
+    </div>
+</body>
+</html>
