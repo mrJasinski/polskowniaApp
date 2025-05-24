@@ -33,7 +33,7 @@ public class UserService
                 .orElseThrow(() -> new NoSuchElementException("User id with given email not found!"));
     }
 
-    User getUserByEmail(final String email)
+    public User getUserByEmail(final String email)
     {
         return this.userRepo.findByEmail(email)
             .orElseThrow(() -> new NoSuchElementException("User with given email not found!"));

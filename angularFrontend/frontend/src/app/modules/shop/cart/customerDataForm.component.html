@@ -1,0 +1,58 @@
+    <form  [formGroup]="customerData" style="text-align: left;">
+              
+                <div class="form-group" >
+                    <label for = "firstName" >Imię: </label>
+                    <input type = "firstName" class = "form-control" formControlName = "firstName" />
+                </div>
+    
+                <div class="form-group" >
+                    <label for = "lastName" >Nazwisko: </label>
+                    <input type = "lastName" class = "form-control" formControlName = "lastName" />
+                </div>
+            <!-- nazwa i nip jako opcja tylko do faktury -->
+                <div class="form-group" *ngIf = "isInvoice">
+                    <label for = "company" >Nazwa firmy: </label>
+                    <input type = "company" class = "form-control" formControlName = "company" />
+                </div>
+    
+                <div class="form-group" *ngIf = "isInvoice" >
+                    <label for = "taxNumber" >NIP: </label>
+                    <input type = "taxNumber" class = "form-control" formControlName = "taxNumber" />
+                </div>
+    
+                <div class="form-group" >
+                    <label for = "streetName" >Ulica: </label>
+                    <input type = "streetName" class = "form-control" formControlName = "streetName" />
+                </div>
+    
+                <div class="form-group" >
+                    <label for = "streetNumber" >Numer budynku: </label>
+                    <input type = "streetNumber" class = "form-control" formControlName = "streetNumber" />
+                </div>
+                <!-- numer lokalu -->
+                <div class="form-group" >
+                    <label for = "localNumber" >Numer lokalu: </label>
+                    <input type = "localNumber" class = "form-control" formControlName = "localNumber" />
+                </div>
+    
+                <div class="form-group" >
+                    <label for = "zipCode" >Kod pocztowy: </label>
+                    <input type = "zipCode" class = "form-control" formControlName = "zipCode" />
+                </div>
+    
+                <div class="form-group" >
+                    <label for = "town" >Miejscowość: </label>
+                    <input type = "town" class = "form-control" formControlName = "town" />
+                </div>
+    
+                <div class="form-group" >
+                    <label for = "phone" >Telefon: </label>
+                    <input type = "phone" class = "form-control" formControlName = "phone" />
+                </div>
+    
+                <div class="form-group" >
+                    <label for = "email" >E - mail: </label>
+                    <input type = "email" class = "form-control" formControlName = "email" />
+                </div>
+    
+            </form>

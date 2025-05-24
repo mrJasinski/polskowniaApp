@@ -12,4 +12,6 @@ interface ShopItemRepository
     boolean existsByTitle(String title);
 
     Optional<ShopItem> findByRefNumber(String refNumber);
+
+    List<Integer> findByRefNumbers(List<String> itemRefNumbers);
 }

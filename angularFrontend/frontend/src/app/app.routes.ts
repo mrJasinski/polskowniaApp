@@ -22,6 +22,7 @@ import { StudentsComponent } from './modules/student/students.component';
 import { TasksComponent } from './modules/task/tasks.component';
 import { ShelfComponent } from './modules/shelf/shelf.component';
 import { FileManagerComponent } from './modules/fileManager/fileManager.component';
+import { AccountSettingsComponent } from './modules/user/accountSettings.component';
 
 export const routes: Routes =
 [
@@ -36,6 +37,7 @@ export const routes: Routes =
     , { path: 'games', component: GamesComponent}
     , { path: 'authenticate', component: AuthComponent}
     , { path: 'dashboard', component: DashboardComponent, canActivate : [AuthGuard]}
+    , { path: 'accountSettings', component: AccountSettingsComponent, canActivate : [AuthGuard]}
     , { path: 'createCourse', component: CourseAddFormComponent, canActivate : [AuthGuard]}
     , { path: 'shop', component : ShopComponent}
     , { path : 'addShopItem', component : ShopItemAddFormComponent, canActivate : [AuthGuard]}

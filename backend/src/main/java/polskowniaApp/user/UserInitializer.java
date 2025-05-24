@@ -29,7 +29,7 @@ class UserInitializer implements ApplicationListener<ContextRefreshedEvent>
             this.userRepo.save(new User(
                     "Wiola"
                     , lecturerMail
-                    ,this.encoder.encode("polskownia")
+                    ,this.encoder.encode("Polskown!4")
                     , UserRole.LECTURER
             ));
 
@@ -39,7 +39,7 @@ class UserInitializer implements ApplicationListener<ContextRefreshedEvent>
             this.userRepo.save(new User(
                     "Studenciak"
                     , studentMail1
-                    ,this.encoder.encode("polskownia")
+                    ,this.encoder.encode("Polskown!4")
                     , UserRole.STUDENT
             ));
 
@@ -49,7 +49,7 @@ class UserInitializer implements ApplicationListener<ContextRefreshedEvent>
             this.userRepo.save(new User(
                     "Uczniak"
                     , studentMail2
-                    ,this.encoder.encode("polskownia")
+                    ,this.encoder.encode("Polskown!4")
                     , UserRole.STUDENT
             ));
     }

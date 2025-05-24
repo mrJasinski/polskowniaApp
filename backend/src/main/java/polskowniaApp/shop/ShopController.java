@@ -7,6 +7,7 @@ import polskowniaApp.shop.discount.DiscountCodeDTO;
 import polskowniaApp.shop.dto.ShopItemWriteModel;
 
 import java.net.URI;
+import java.util.NoSuchElementException;
 
 @RestController
 class ShopController
@@ -63,6 +64,13 @@ class ShopController
     @PostMapping("/getDiscount")
     ResponseEntity<?> getDiscount(@RequestBody CodeDTO json)
     {
-        return ResponseEntity.ok(this.shopService.getDiscountValue(json.getDiscountCode(), json.getCartSum()));
+        try
+        {
+            return ResponseEntity.ok(this.shopService.getDiscountValue(json.getDiscountCode(), json.getCartSum()));
+        }
+        catch (NoSuchElementException ex)
+        {
+            return ResponseEntity.badRequest().body("Podany kod rabatowy nie istnieje!");
+        }
     }
 }

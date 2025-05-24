@@ -24,6 +24,6 @@ interface SqlUserRepository extends UserRepository, JpaRepository<User, Integer>
     @Transactional
     @Modifying
     @Override
-    @Query(value = "INSERT INTO users (password) VALUES (:password) WHERE email = :email", nativeQuery = true)
+    @Query(value = "UPDATE users SET password = :password WHERE email = :email", nativeQuery = true)
     void updatePasswordByEmail(String email, String password);
 }

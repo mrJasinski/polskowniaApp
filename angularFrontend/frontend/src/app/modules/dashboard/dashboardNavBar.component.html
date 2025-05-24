@@ -28,11 +28,6 @@
         </div>
         <p>Przypominajka o zadaniach do zrobienia</p>
 
-        <div>
-            <!-- ustawienia konta - zmian hasła adresy wysłki etc -->
-            <a >Ustawienia konta</a>
-        </div>
-
         <div *ngIf = "userRole == uR.STUDENT">
             <!-- ebooki etc zakupione w sklepie -->
             <a routerLink="/myShelf" >Moja półka</a>
@@ -42,6 +37,12 @@
             <!-- panel obsługowy ebooków etc nauczyciela -->
             <a routerLink="/fileManager" >Zarządzanie plikami</a>
         </div>
+
+        <div>
+            <!-- ustawienia konta - zmian hasła adresy wysłki etc -->
+            <a routerLink="/accountSettings">Ustawienia konta</a>
+        </div>
+        
 
 
     </div>

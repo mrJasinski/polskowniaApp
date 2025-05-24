@@ -19,12 +19,13 @@ export class AuthService
 
     }
 
-    signUp(email: string, password: string)
+    signUp(email: string, password: string, name : string)
     {
         return this.http.post(AppConstants.APP_URL + AppConstants.REGISTER_API_URL
             , { 
                 email : email
                 , password : password
+                , name : name
             });
     }
 

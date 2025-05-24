@@ -5,6 +5,7 @@ import { ShopItem } from "./shopItem.model";
 import { ShopItemReadModel } from "./shopItemRead.model";
 import { DiscountCode } from "./discountCode/discountCode.model";
 import { NgForm } from "@angular/forms";
+import { Order } from "../order/order.model";
 
 @Injectable({providedIn: 'root'})
 export class ShopService
@@ -44,6 +45,23 @@ export class ShopService
                 discountCode : discountCode
                 , cartSum : cartSum
             }, { observe : 'response' });
+    }
+
+    createOrder(order : Order)
+    {
+        return this.http.post<Order>(AppConstants.APP_URL + "/createOrder"
+            , {
+                isInvoice : order.isInvoice
+                , customerData : order.customerData
+                , paymentMethod : order.paymentMethod
+                , deliveryMethod : order.deliveryMethod
+                , shopItems : order.cart
+                , discountCode : order.discountCode
+                , isFourteenDays : order.isFourteenDays
+                , isToCAccepted : order.isToCAccepted
+                , comment : order.comment
+            }
+            , { observe : 'response' });
     }
 
     generateDiscountCode(code : DiscountCode)

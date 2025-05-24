@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
-class ShopService
+public class ShopService
 {
     private final ShopItemRepository shopItemRepo;
     private final DiscountCodeRepository discountCodeRepo;
@@ -38,6 +38,12 @@ class ShopService
                 .stream()
                 .map(ShopItem::toReadModel)
                 .toList();
+    }
+
+    public DiscountCode getDiscountCodeByName(final String code)
+    {
+        return this.discountCodeRepo.findByCode(code)
+                .orElseThrow(() -> new NoSuchElementException("Discount code with given name not found!"));
     }
 
     List<String> getShopItemCategories()
@@ -77,8 +83,6 @@ class ShopService
         return getShopItemByRefNumber(refNumber).toReadModel();
     }
 
-
-
     List<DiscountCode> getAllDiscountCodes()
     {
         return this.discountCodeRepo.findAll();
@@ -107,9 +111,6 @@ class ShopService
 
     double getDiscountValue(final String code, final double cartSum)
     {
-        System.out.println("xxx");
-        System.out.println(code);
-
         var discountCode = this.discountCodeRepo.findDiscountByNameAndDate(code)
                 .orElseThrow(() -> new NoSuchElementException("Discount code not found!"));
 
@@ -123,5 +124,10 @@ class ShopService
         }
 
         return discountValue;
+    }
+
+    public List<Integer> getShopItemIdsByRefNumbers(final List<String> itemRefNumbers)
+    {
+        return this.shopItemRepo.findByRefNumbers(itemRefNumbers);
     }
 }

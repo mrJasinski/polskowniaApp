@@ -30,6 +30,7 @@ class AuthManager implements AuthenticationManager
     @Override
     public Authentication authenticate(final Authentication authentication) throws AuthenticationException
     {
+
         var username = authentication.getName();
         var pwd = authentication.getCredentials().toString();
 

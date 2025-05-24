@@ -11,5 +11,7 @@ public interface DiscountCodeRepository
     DiscountCode save(DiscountCode toSave);
 
     Optional<DiscountCode> findDiscountByNameAndDate(String code);
+
+    Optional<DiscountCode> findByCode(String code);
 //    Optional<DiscountCode> findDiscountByNameAndDate(String code, LocalDate date);
 }

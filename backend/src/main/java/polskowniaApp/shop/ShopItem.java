@@ -1,11 +1,13 @@
 package polskowniaApp.shop;
 
 import jakarta.persistence.*;
+import polskowniaApp.order.OrderedItem;
 import polskowniaApp.shop.dto.ShopItemReadModel;
 import polskowniaApp.utils.Category;
 import polskowniaApp.utils.Level;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "shop_items")
@@ -24,6 +26,8 @@ public class ShopItem
     private int duration;       //lesson duration (eg 45 min )
     @Enumerated(EnumType.STRING)
     private Level level;
+    @OneToMany(mappedBy = "shopItem")
+    private List<OrderedItem> orderedItems;
 
     ShopItem()
     {

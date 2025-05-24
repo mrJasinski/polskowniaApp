@@ -13,10 +13,15 @@ public class UserDTO
     {
     }
 
-    public UserDTO(final String email, final String password, final UserRole role)
+    public UserDTO(final String email, final String password)
     {
         this.email = email;
         this.password = password;
+    }
+
+    public UserDTO(final String email, final String password, final UserRole role)
+    {
+        this(email, password);
         this.role = role;
     }
 

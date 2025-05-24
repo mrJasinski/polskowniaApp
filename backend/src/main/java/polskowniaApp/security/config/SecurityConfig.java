@@ -59,7 +59,7 @@ class SecurityConfig
                 .csrf(csrf -> csrf.csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers("/register",
                                 "/authenticate", "/dashboard", "/createCourse", "/myCourses/**", "/allCourses", "/shop", "/getShopItemCategories"
                         , "/addShopItem/**", "/getShopItem/**", "/getDiscountCodes", "/sendMail", "/getStudents", "/generateDiscountCode", "/getDiscount"
-                        ,"/restorePassword", "/changePassword", "/downloadFile", "/fileManager", "/uploadFile**", "/getFiles")
+                        ,"/restorePassword", "/changePassword", "/downloadFile", "/fileManager", "/uploadFile**", "/getFiles", "/createOrder", "/orders")
 //                        , "/addShopItem/**", "/getShopItem/**")
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
@@ -69,7 +69,7 @@ class SecurityConfig
 //                        .requestMatchers("/register", "/authenticate", "/shop", "/getShopItemCategories").permitAll()
                         .requestMatchers("/dashboard", "/createCourse", "/myCourses/**", "/allCourses", "/addShopItem/**", "/getShopItem/**"
                                 , "/getDiscountCodes", "/getStudents", "/generateDiscountCode", "/changePassword", "/downloadFile", "/fileManager", "/uploadFile**"
-                                , "/getFiles").authenticated())
+                                , "/getFiles", "/createOrder", "/orders").authenticated())
                 .httpBasic(Customizer.withDefaults());
 
         return http.build();

@@ -1,14 +1,15 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "./auth.service";
 import { Router } from "@angular/router";
-import { FormControl, FormGroup, FormsModule, NgForm, NgModel } from "@angular/forms";
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { AppConstants } from "../../constans/app.constans";
 import { NgIf } from "@angular/common";
+import PasswordValidator from "../validator/passwordValidator.validator";
 
 @Component({
     selector: 'app-auth',
     templateUrl: './auth.component.html'
-    , imports: [FormsModule, NgIf]
+    , imports: [ReactiveFormsModule, NgIf]
 })
 export class AuthComponent implements OnInit
 {
@@ -25,20 +26,16 @@ export class AuthComponent implements OnInit
     {
         this.authForm = new FormGroup(
             {
-                'email' : new FormControl(null)
+                'email' : new FormControl(null, [Validators.required, Validators.email])
+                , 'password' : new FormControl(null, this.isLoginMode ? [Validators.required] : [Validators.required, Validators.minLength(8), PasswordValidator.passwordStrength])
+                , 'confirmPassword' : new FormControl(null, !this.isLoginMode ? [Validators.required, PasswordValidator.matchPassword] : [])
+                , 'name' : new FormControl(null, !this.isLoginMode ? [Validators.required] : [])
             });
     }
 
     onSwitchMode()
     {
         this.isLoginMode = !this.isLoginMode;
-    }
-
-    
-
-    checkPasswords(password : string, confirmPassword : NgModel)
-    {
-        
     }
 
     onSubmit()
@@ -66,8 +63,7 @@ export class AuthComponent implements OnInit
 
         this.authService.signUp(email, password, name).subscribe(resData => 
         {
-            /* this.router.navigate(['/account']); */
-            console.log(resData);
+            this.router.navigate([AppConstants.DASHBOARD_URL]);
         });
     }
 
