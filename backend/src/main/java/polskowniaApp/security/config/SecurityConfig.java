@@ -56,10 +56,12 @@ class SecurityConfig
                         return config;
                     }
                 }))
-                .csrf(csrf -> csrf.csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers("/register",
-                                "/authenticate", "/dashboard", "/createCourse", "/myCourses/**", "/allCourses", "/shop", "/getShopItemCategories"
-                        , "/addShopItem/**", "/getShopItem/**", "/getDiscountCodes", "/sendMail", "/getStudents", "/generateDiscountCode", "/getDiscount"
-                        ,"/restorePassword", "/changePassword", "/downloadFile", "/fileManager", "/uploadFile**", "/getFiles", "/createOrder", "/orders")
+                .csrf(csrf -> csrf.csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers(
+                        "/register", "/authenticate", "/dashboard"
+                                , "/createCourse", "/myCourses/**", "/allCourses"
+                                , "/shop", "/getShopItemCategories", "/addShopItem/**", "/shopItem/**", "/getDiscountCodes"
+                                , "/sendMail", "/getStudents", "/generateDiscountCode", "/getDiscount"
+                        ,"/restorePassword", "/changePassword", "/downloadFile/**", "/fileManager", "/uploadFile**", "/getFiles", "/createOrder", "/orders", "/myShelf", "/allOrders")
 //                        , "/addShopItem/**", "/getShopItem/**")
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
@@ -67,9 +69,11 @@ class SecurityConfig
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/register", "/authenticate", "/shop", "/getShopItemCategories", "/sendMail", "/getDiscount", "/restorePassword").permitAll()
 //                        .requestMatchers("/register", "/authenticate", "/shop", "/getShopItemCategories").permitAll()
-                        .requestMatchers("/dashboard", "/createCourse", "/myCourses/**", "/allCourses", "/addShopItem/**", "/getShopItem/**"
-                                , "/getDiscountCodes", "/getStudents", "/generateDiscountCode", "/changePassword", "/downloadFile", "/fileManager", "/uploadFile**"
-                                , "/getFiles", "/createOrder", "/orders").authenticated())
+                        .requestMatchers("/dashboard"
+                                , "/createCourse", "/myCourses/**", "/allCourses"
+                                , "/addShopItem/**", "/shopItem/**"
+                                , "/getDiscountCodes", "/getStudents", "/generateDiscountCode", "/changePassword", "/downloadFile/**", "/fileManager", "/uploadFile**"
+                                , "/getFiles", "/createOrder", "/orders", "/myShelf", "/allOrders").authenticated())
                 .httpBasic(Customizer.withDefaults());
 
         return http.build();

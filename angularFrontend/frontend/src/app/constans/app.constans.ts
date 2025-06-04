@@ -11,7 +11,7 @@ export const  AppConstants = {
     , ALL_COURSES_URL : "/allCourses"
     , SHOP_URL : "/shop"
     , ADD_SHOP_ITEM_URL : "/addShopItem"
-    , SHOP_ITEM_URL : "/getShopItem"
+    , SHOP_ITEM_URL : "/shopItem"
     , CART_URL : "/cart"
     , DISCOUNT_CODES_URL : "/discountCodes"
     , GENERATE_DISCOUNT_CODE_URL : "/generateDiscountCode"

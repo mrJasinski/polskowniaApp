@@ -1,12 +1,8 @@
 package polskowniaApp.order.dto;
 
-import polskowniaApp.order.OrderedItem;
-
-import java.util.List;
-
 public class OrderReadModel
 {
-    private String number;
+    private String refNumber;
     private String status;
     private boolean isInvoice;
     private String paymentMethod;
@@ -17,13 +13,13 @@ public class OrderReadModel
     //private List<OrderedItem> orderedItems;
 
 
-    OrderReadModel()
+    public OrderReadModel()
     {
     }
 
-    OrderReadModel(final String number, final String status, final boolean isInvoice, final String paymentMethod, final String deliveryMethod, final String comment)
+    public OrderReadModel(final String refNumber, final String status, final boolean isInvoice, final String paymentMethod, final String deliveryMethod, final String comment)
     {
-        this.number = number;
+        this.refNumber = refNumber;
         this.status = status;
         this.isInvoice = isInvoice;
         this.paymentMethod = paymentMethod;
@@ -31,9 +27,9 @@ public class OrderReadModel
         this.comment = comment;
     }
 
-    public String getNumber()
+    public String getRefNumber()
     {
-        return this.number;
+        return this.refNumber;
     }
 
     public String getStatus()

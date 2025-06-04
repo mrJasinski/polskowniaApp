@@ -5,6 +5,7 @@ import polskowniaApp.order.dto.OrderReadModel;
 import polskowniaApp.shop.discount.DiscountCode;
 import polskowniaApp.user.User;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -14,7 +15,8 @@ class Order
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String number;
+    private String refNumber;
+    private LocalDate createdDate;
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
     private boolean isInvoice;
@@ -41,7 +43,8 @@ class Order
 
     Order(final boolean isInvoice, final String paymentMethod, final String deliveryMethod, final boolean isFourteenDays, final boolean isTocAccepted, final String comment, final DiscountCode discountCode, final CustomerData customerData, final User user)
     {
-        this.number = generateNumber();
+        this.createdDate = LocalDate.now();
+        this.refNumber = generateNumber();
         this.status = OrderStatus.CREATED;
         this.isInvoice = isInvoice;
         this.paymentMethod = paymentMethod;
@@ -56,14 +59,30 @@ class Order
 
     OrderReadModel toReadModel()
     {
-//        TODO
-        return null;
+        return new OrderReadModel(
+                this.refNumber
+                , this.status.name()
+                , this.isInvoice
+                , this.paymentMethod
+                , this.deliveryMethod
+                , this.comment
+        );
     }
 
     private String generateNumber()
     {
-//        TODO
-        return "refNumber";
+//        two last digits of year
+        var y = String.valueOf(this.createdDate.getYear()).substring(2, 4);
+        var m = this.createdDate.getMonthValue();
+        var d = this.createdDate.getDayOfMonth();
+
+        var i = isInvoice ? "I" : "B";
+
+        var u = 1000 + user.getId();
+
+//        dodatkowo check w serwisie czy są inne zamówienia z tego dnia tego użytkownika i na końcu dodany numer kolejny? argument w konstruktorze
+
+        return "O" + y + m + d + "_" + this.orderedItems.size() + "_" + i + u;
     }
 
     int getId()

@@ -14,4 +14,6 @@ interface ShopItemRepository
     Optional<ShopItem> findByRefNumber(String refNumber);
 
     List<Integer> findByRefNumbers(List<String> itemRefNumbers);
+
+    List<ShopItem> findByIds(List<Integer> itemIds);
 }

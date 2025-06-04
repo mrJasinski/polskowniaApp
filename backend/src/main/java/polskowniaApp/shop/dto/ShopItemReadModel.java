@@ -1,7 +1,9 @@
 package polskowniaApp.shop.dto;
 
-import polskowniaApp.utils.Category;
-import polskowniaApp.utils.Level;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class ShopItemReadModel
 {
@@ -13,6 +15,7 @@ public class ShopItemReadModel
     private int length;
     private int duration;
     private String level;
+    private byte[] logo;
 
     ShopItemReadModel()
     {
@@ -26,7 +29,8 @@ public class ShopItemReadModel
             , final String category
             , final int length
             , final int duration
-            , final String level)
+            , final String level
+            , final String logoReference)
     {
         this.refNumber = refNumber;
         this.title = title;
@@ -36,6 +40,15 @@ public class ShopItemReadModel
         this.length = length;
         this.duration = duration;
         this.level = level;
+
+        if (!logoReference.isEmpty())
+            try
+            {
+                this.logo = Files.readAllBytes(Path.of(logoReference));
+            } catch (IOException e)
+            {
+                throw new RuntimeException(e);
+            }
     }
 
     public String getRefNumber()
@@ -76,5 +89,10 @@ public class ShopItemReadModel
     public String getLevel()
     {
         return this.level;
+    }
+
+    public byte[] getLogo()
+    {
+        return this.logo;
     }
 }

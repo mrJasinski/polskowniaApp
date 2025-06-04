@@ -7,7 +7,8 @@ export class ShopItem
         , public category : String
         , public length : number
         , public duration : number
-        , public level : String
+        , public level : string
+        //, public levels : String[]
         , public refNumber? : string)
     {
         

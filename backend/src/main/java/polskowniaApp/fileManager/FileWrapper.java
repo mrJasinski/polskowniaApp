@@ -1,6 +1,6 @@
 package polskowniaApp.fileManager;
 
-class FileWrapper
+public class FileWrapper
 {
     private String name;
     private String format;
@@ -8,6 +8,11 @@ class FileWrapper
 
     FileWrapper()
     {
+    }
+
+    public FileWrapper(final String name)
+    {
+        this.name = name;
     }
 
     FileWrapper(final String name, final String format, final String size)

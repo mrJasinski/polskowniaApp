@@ -16,4 +16,12 @@ interface SqlOrderRepository extends OrderRepository, JpaRepository<Order, Integ
     @Transactional
     @Query(value = "INSERT INTO ordered_items (order_id, shop_item_id) VALUES (:orderId, :shopItemId)", nativeQuery = true)
     void assignShopItemsToOrder(int shopItemId, int orderId);
+
+    @Override
+    @Query(value = "SELECT id FROM orders WHERE user_id = :userId", nativeQuery = true)
+    List<Integer> findOrderIdsByUserId(int userId);
+
+    @Override
+    @Query(value = "SELECT shop_item_id FROM ordered_items WHERE order_id IN :orderIds", nativeQuery = true)
+    List<Integer> findShopItemsIdsByOrderIds(List<Integer> orderIds);
 }

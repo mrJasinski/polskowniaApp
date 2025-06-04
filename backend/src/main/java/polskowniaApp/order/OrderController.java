@@ -32,4 +32,16 @@ class OrderController
     {
         return ResponseEntity.ok(this.orderService.getOrdersByUserIdAsReadModel(this.jwtService.getUserIdFromToken(request)));
     }
+
+    @GetMapping("/allOrders")
+    ResponseEntity<?> getAllOrders()
+    {
+        return ResponseEntity.ok(this.orderService.getAllOrdersAsReadModel());
+    }
+
+    @GetMapping("/myShelf")
+    ResponseEntity<?> getMyShelf(HttpServletRequest request)
+    {
+        return ResponseEntity.ok(this.orderService.getMyShelfByUserId(this.jwtService.getUserIdFromToken(request)));
+    }
 }

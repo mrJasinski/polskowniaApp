@@ -2,8 +2,7 @@ package polskowniaApp.utils;
 
 public enum Level
 {
-    ALL
-    , A0
+    A0
     , A1
     , A2
     , B1

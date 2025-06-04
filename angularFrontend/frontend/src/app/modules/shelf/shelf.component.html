@@ -9,9 +9,16 @@
     <dashboard-nav-bar></dashboard-nav-bar>
     <div>
         <h2>Moja półka</h2>
+
         <div>
-            <button (click)="onDownload()">Pobierz</button>
+            <li *ngFor = "let f of files"> {{f.name}} <button (click)="onDownload(f.name)">Pobierz</button></li>
         </div>
+
+
+
+        <!-- <div>
+            <button (click)="onDownload()">Pobierz</button>
+        </div> -->
     </div>
 </body>
 </html>

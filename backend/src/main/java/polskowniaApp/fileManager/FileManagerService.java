@@ -14,11 +14,11 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-class FileManagerService
+public class FileManagerService
 {
-    static final String STORAGE_DIRECTORY = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "files";
+    public static final String STORAGE_DIRECTORY = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "files";
 
-    void saveFile(MultipartFile toSave)
+    public void saveFile(MultipartFile toSave)
     {
 //        TODO
 //        w ten sposób zaciąga nazwę nadaną przez użytkownika

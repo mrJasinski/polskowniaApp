@@ -2,6 +2,7 @@ package polskowniaApp.user;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import polskowniaApp.fileManager.FileWrapper;
 import polskowniaApp.mail.MailService;
 import polskowniaApp.user.dto.UserDTO;
 import polskowniaApp.user.dto.UserLoggedDTO;

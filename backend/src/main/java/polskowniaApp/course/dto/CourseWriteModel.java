@@ -1,10 +1,7 @@
 package polskowniaApp.course.dto;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.Set;
 
 public class CourseWriteModel

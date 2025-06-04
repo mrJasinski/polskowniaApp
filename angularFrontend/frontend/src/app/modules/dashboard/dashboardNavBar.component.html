@@ -15,7 +15,8 @@
         </div>
 
         <div>
-            <a routerLink = "/orders">Zamówienia</a>
+            <a *ngIf = "userRole == uR.STUDENT" routerLink = "/orders">Zamówienia</a>
+            <a *ngIf = "userRole == uR.LECTURER" routerLink = "/allOrders">Zamówienia</a>
         </div>
 
         <div *ngIf = "userRole == uR.LECTURER" >

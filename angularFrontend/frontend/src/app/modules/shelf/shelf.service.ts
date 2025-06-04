@@ -11,12 +11,17 @@ export class ShelfService
     }
 
 //just very test method
-    downloadFile()
+    downloadFile(filename : string)
     {
-        return this.http.get(AppConstants.APP_URL + "/downloadFile", 
+        return this.http.get(AppConstants.APP_URL + "/downloadFile/" + filename, 
             {
                 observe : 'response'
                 , responseType : 'blob'
             });
+    }
+
+    getMyShelf()
+    {
+        return this.http.get(AppConstants.APP_URL + "/myShelf", {observe : 'response'});
     }
 }

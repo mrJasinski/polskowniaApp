@@ -9,6 +9,7 @@ export class ShopItemReadModel
         , public length : number
         , public duration : number
         , public level : String
+        , public logo? : string
         )
     {
         

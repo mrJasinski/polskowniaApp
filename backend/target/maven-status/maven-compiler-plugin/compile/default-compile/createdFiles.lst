@@ -3,6 +3,7 @@ polskowniaApp\course\lecture\Lecture.class
 polskowniaApp\mail\MailConfig.class
 polskowniaApp\mail\MailController.class
 polskowniaApp\order\OrderedItem.class
+polskowniaApp\order\dto\OrderReadModel.class
 polskowniaApp\user\UserInitializer.class
 polskowniaApp\fileManager\FileManagerService.class
 polskowniaApp\mail\MailService.class

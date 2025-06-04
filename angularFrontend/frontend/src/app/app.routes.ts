@@ -16,13 +16,15 @@ import { OrdersComponent } from './modules/order/orders.component';
 import { CourseComponent } from './modules/course/course.component';
 import { AllCoursesComponent } from './modules/course/allCourses.component';
 import { CartSummaryComponent } from './modules/shop/cart/cartSummary.component';
-import { ShopItemAddFormComponent } from './modules/shop/shopItemAddForm.component';
+import { ShopItemFormComponent } from './modules/shop/shopItemForm.component';
 import { DiscountCodesComponent } from './modules/shop/discountCode/discountCodes.component';
 import { StudentsComponent } from './modules/student/students.component';
 import { TasksComponent } from './modules/task/tasks.component';
 import { ShelfComponent } from './modules/shelf/shelf.component';
 import { FileManagerComponent } from './modules/fileManager/fileManager.component';
 import { AccountSettingsComponent } from './modules/user/accountSettings.component';
+import { AllOrdersComponent } from './modules/order/allOrders.component';
+import { ShopItemComponent } from './modules/shop/shopItem.component';
 
 export const routes: Routes =
 [
@@ -40,12 +42,14 @@ export const routes: Routes =
     , { path: 'accountSettings', component: AccountSettingsComponent, canActivate : [AuthGuard]}
     , { path: 'createCourse', component: CourseAddFormComponent, canActivate : [AuthGuard]}
     , { path: 'shop', component : ShopComponent}
-    , { path : 'addShopItem', component : ShopItemAddFormComponent, canActivate : [AuthGuard]}
-    , { path : 'addShopItem/:refNumber', component : ShopItemAddFormComponent, canActivate : [AuthGuard]}
+    , { path : 'addShopItem', component : ShopItemFormComponent, canActivate : [AuthGuard]}
+    , { path : 'addShopItem/:refNumber', component : ShopItemFormComponent, canActivate : [AuthGuard]}
+    , { path : 'shopItem/:refNumber', component : ShopItemComponent}
     , { path : 'cart', component : CartComponent}
     , { path : 'cartSummary', component : CartSummaryComponent}
     , { path : 'discountCodes', component : DiscountCodesComponent, canActivate : [AuthGuard]}
     , { path : 'orders', component : OrdersComponent, canActivate : [AuthGuard]}
+    , { path : 'allOrders', component : AllOrdersComponent, canActivate : [AuthGuard]}
     , { path : 'students', component : StudentsComponent, canActivate : [AuthGuard]}
     , { path : 'tasks', component : TasksComponent, canActivate : [AuthGuard]}
     , { path : 'myShelf', component : ShelfComponent, canActivate : [AuthGuard]}

@@ -4,7 +4,6 @@ import { AppConstants } from "../../constans/app.constans";
 import { ShopItem } from "./shopItem.model";
 import { ShopItemReadModel } from "./shopItemRead.model";
 import { DiscountCode } from "./discountCode/discountCode.model";
-import { NgForm } from "@angular/forms";
 import { Order } from "../order/order.model";
 
 @Injectable({providedIn: 'root'})
@@ -76,10 +75,17 @@ export class ShopService
             }, { observe : 'response' });
     }
 
-    sendShopItemAddForm(item : ShopItem)
+    sendShopItemAddForm(formData : FormData)
     {
-        return this.http.post<ShopItem>(AppConstants.APP_URL + AppConstants.ADD_SHOP_ITEM_URL, 
-            {
+        return this.http.post(AppConstants.APP_URL + AppConstants.ADD_SHOP_ITEM_URL
+            , formData
+            , { responseType : 'text'});
+    }
+
+    /*sendShopItemAddForm(item : ShopItem)
+    {
+        return this.http.post(AppConstants.APP_URL + AppConstants.ADD_SHOP_ITEM_URL
+            , {
                 title : item.title
                 , price : item.price
                 , description : item.description
@@ -87,8 +93,9 @@ export class ShopService
                 , length : item.length
                 , duration : item.duration
                 , level : item.level
-            });
-    }
+            }
+            , { responseType : 'text'});
+    }*/
 
     getItemRefNumber()
     {

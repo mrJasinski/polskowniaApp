@@ -1,12 +1,12 @@
 import { Component } from "@angular/core";
 import { ShopService } from "./shop.service";
-import { ShopItem } from "./shopItem.model";
 import { NgFor, NgIf } from "@angular/common";
 import { AuthService } from "../auth/auth.service";
 import { UserRole } from "../../constans/role.constans";
 import { Router, RouterLink } from "@angular/router";
 import { AppConstants } from "../../constans/app.constans";
 import { ShopItemReadModel } from "./shopItemRead.model";
+import { levels } from "../../constans/levels.constant";
 
 @Component
 ({
@@ -21,6 +21,9 @@ export class ShopComponent
     filteredShopItems = new Array<ShopItemReadModel>;
     categories = new Array<String>;
     selectedCategories = new Array<String>;
+    levels = levels;
+    selectedLevels : Array<String>;
+
     userRole = '';
     uR = UserRole;
         
@@ -58,7 +61,7 @@ export class ShopComponent
         this.shopService.addItemToCart(item);
     }
 
-    onSelection($event)
+    onSelectionCategory($event)
     {
       //założenia
       // zaznaczenie 'wszystko' odznacza inne wybrane opcje i wyświetla wszystkie pozycje na sklepie
@@ -91,11 +94,29 @@ export class ShopComponent
 
       if (selected == this.categories.at(0))
         this.filteredShopItems = this.shopItems;
+    }
 
-      //if (selected == this.categories.at(0))
-      //{
-        // const isChecked = $event.target.checked;
-      //}
+    onSelectionLevel($event)
+    {
+      //nie sortuje
+
+      const selected = $event.target.value;
+      const isChecked = $event.target.checked;
+
+      if (isChecked)
+          this.selectedLevels.push(selected);
+  
+        if(!isChecked)
+        {
+            const i = this.selectedLevels.indexOf(selected);
+            this.selectedLevels.splice(i, 1);
+        }
+
+        if (this.selectedLevels.length == 0)
+          this.filteredShopItems = this.shopItems;
+  
+        if (this.selectedLevels.length > 0)
+          this.filteredShopItems = this.shopItems.filter(item => this.selectedLevels.includes(item.level));
     }
 
     onAddShopItem()
@@ -112,5 +133,14 @@ export class ShopComponent
     {
       this.shopService.itemRefNumber = refNumber;
       this.router.navigate([AppConstants.ADD_SHOP_ITEM_URL + "/" + refNumber]);
+    }
+
+    onShowShopItem(refNumber : string)
+    {
+      console.log('xxx ' + refNumber);
+
+      this.shopService.itemRefNumber = refNumber;
+
+      this.router.navigate([AppConstants.SHOP_ITEM_URL + "/" + refNumber])
     }
 }

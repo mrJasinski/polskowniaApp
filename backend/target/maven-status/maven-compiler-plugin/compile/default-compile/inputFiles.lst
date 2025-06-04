@@ -22,6 +22,7 @@ D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\course\CourseAssig
 D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\order\CustomerDataRepository.java
 D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\mail\MailConfig.java
 D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\shop\ShopItem.java
+D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\order\dto\OrderReadModel.java
 D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\user\UserRepository.java
 D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\fileManager\FileManagerController.java
 D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\order\OrderRepository.java

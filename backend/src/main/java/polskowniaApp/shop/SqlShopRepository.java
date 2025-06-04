@@ -12,4 +12,8 @@ interface SqlShopRepository extends ShopItemRepository, JpaRepository<ShopItem, 
     @Override
     @Query(value = "SELECT id FROM shop_items WHERE ref_number IN :itemRefNumbers", nativeQuery = true)
     List<Integer> findByRefNumbers(List<String> itemRefNumbers);
+
+    @Override
+    @Query(value = "SELECT * FROM shop_items WHERE id IN :itemIds", nativeQuery = true)
+    List<ShopItem> findByIds(List<Integer> itemIds);
 }

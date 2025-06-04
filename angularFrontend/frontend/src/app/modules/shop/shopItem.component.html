@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div style="float: inline-start; margin-left: 50px; margin-right: 10px; width: 40%;" >
+        <div>
+            Shop Item!
+            <h3>{{item.title}}</h3>
+
+            <p>Szczegóły:</p>
+            <p>Poziom: {{item.level}}</p>
+            <p>Ilość jednostek: {{item.length}} --- kursy</p>
+            <p>Długość lekcji: {{item.length}} min --- kursy</p>
+            <p>Ilość stron --- ebooki/ksiazki</p>
+            <p>dostepny format --- ebook/arkusz</p>
+
+            <p>Opis:</p>
+            <p>{{item.description}}</p>
+        </div>
+    </div>
+    <div style="display: inline-block; margin-right: 10px;">
+        miejsce na okładkę/obrazek
+    </div>
+    <div style="display: inline-block;">
+        <p>Cena {{item.price}} zł</p>
+        <button>Powrót do sklepu</button>
+        <button>Dodaj do listy życzeń</button>
+        <button>Dodaj do koszyka</button>
+    </div>
+</body>
+</html>

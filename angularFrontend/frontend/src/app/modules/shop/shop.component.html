@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        li
+        {
+            list-style-type: none;
+        }
+    </style>
 </head>
 <body style="margin: auto; width: 80%;">
-
-
-    <!-- przycisk przejścia do koszyka? -->
     
     <div *ngIf="userRole == uR.LECTURER" >
         <p>panel admina/nauczyciela -> dodawanie/usuwanie/edycja pozycji (usuwanie i edycja przycisk przy pozycji) </p>
@@ -23,18 +26,27 @@
     </div>
 
     <div style="float: inline-start; margin-right: 10px;">
-        <h3>Kategorie: </h3>
-        <tr  *ngFor = "let category of categories">
-            <input type="checkbox" [value]="category" (change) = "onSelection($event)" >{{category}}
-        </tr>
+        <h3>Kategoria: </h3>
+        <li  *ngFor = "let category of categories">
+            <input type="checkbox" [value]="category" (change) = "onSelectionCategory($event)" >{{category}}
+        </li>
         <h3>Poziom: </h3>
         <!-- filtr po poziomie i czy uwzględniać poziomy pośrednie np B1/B2?-->
+         <li *ngFor = "let level of levels">
+            <input type="checkbox" [value]="level" (change) = "onSelectionLevel($event)" >{{level}}
+         </li>
     </div>
 
     <div style="display: inline-block;">
         <tr *ngFor = "let item of filteredShopItems">
-            <td>
-                <h3>{{item.title}}</h3>
+            <td style = "width: 128px; vertical-align: middle;">
+                <img attr.src = "data:image/png;base64 , {{item.logo}}" alt = "{{item.title}}" style = "width: 128px; height: 128px; border: 1px solid black;">
+            </td>
+            <td >
+                <!-- link przeprowadzający do danej pozycji np w tytule -->
+                <p (click) = "onShowShopItem(item.refNumber)" style="cursor: pointer;">{{item.title}}
+                    <a  ></a>
+                </p>
                 <p>Cena {{item.price}} PLN</p>
                 <p>{{item.description}}</p>
                 <p>{{item.category}}</p>

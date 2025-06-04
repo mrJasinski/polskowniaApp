@@ -4,6 +4,8 @@ D:\projekty\polskowniaApp\backend\src\test\java\polskowniaApp\user\UserServiceUn
 D:\projekty\polskowniaApp\backend\src\test\java\polskowniaApp\course\CourseUnitTest.java
 D:\projekty\polskowniaApp\backend\src\test\java\polskowniaApp\course\dto\CourseWriteModelUnitTest.java
 D:\projekty\polskowniaApp\backend\src\test\java\polskowniaApp\utils\CategoryUnitTest.java
+D:\projekty\polskowniaApp\backend\src\test\java\polskowniaApp\shop\dto\ShopItemReadModelUnitTest.java
 D:\projekty\polskowniaApp\backend\src\test\java\polskowniaApp\shop\discount\DiscountCodeUnitTest.java
 D:\projekty\polskowniaApp\backend\src\test\java\polskowniaApp\shop\discount\DiscountCodeDTOUnitTest.java
 D:\projekty\polskowniaApp\backend\src\test\java\polskowniaApp\course\CourseServiceUnitTest.java
+D:\projekty\polskowniaApp\backend\src\test\java\polskowniaApp\order\OrderUnitTest.java

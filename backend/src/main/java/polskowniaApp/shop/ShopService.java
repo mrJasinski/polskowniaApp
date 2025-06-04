@@ -9,11 +9,14 @@ import polskowniaApp.shop.dto.ShopItemWriteModel;
 import polskowniaApp.utils.Category;
 import polskowniaApp.utils.Level;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
+
+import static polskowniaApp.fileManager.FileManagerService.STORAGE_DIRECTORY;
 
 @Service
 public class ShopService
@@ -34,6 +37,9 @@ public class ShopService
 
     List<ShopItemReadModel> getAllShopItemsAsReadModel()
     {
+//        TODO
+//        jeśli zmienię zapis do bazy z poziomami jako listą to wtedy pozycje sklepu trzeba dodatkowo iterować po poziomach
+
         return this.getAllShopItems()
                 .stream()
                 .map(ShopItem::toReadModel)
@@ -48,19 +54,43 @@ public class ShopService
 
     List<String> getShopItemCategories()
     {
-        var result = new ArrayList<String>();
 
-        result.add("Wszystkie");
-        result.addAll(
-                Arrays.stream(Category.values())
+        return new ArrayList<String>(Arrays.stream(Category.values())
                 .map(Category::getName)
                 .toList());
-        
-        return result;
     }
 
-    ShopItem createShopItem(final ShopItemWriteModel item)
+//    ShopItem createShopItem(final ShopItemWriteModel item)
+//    {
+//        return this.shopItemRepo.save(new ShopItem(
+//                item.getTitle()
+//                , item.getPrice()
+//                , item.getDescription()
+//                , Category.getByName(item.getCategory())
+//                , item.getLength()
+//                , item.getDuration()
+//                , Level.valueOf(item.getLevel())
+//        ));
+//    }
+//
+//    ShopItem createShopItemWithFile(final ShopItemWriteModel item, final String fileReference)
+//    {
+//        return this.shopItemRepo.save(new ShopItem(
+//                item.getTitle()
+//                , item.getPrice()
+//                , item.getDescription()
+//                , Category.getByName(item.getCategory())
+//                , item.getLength()
+//                , item.getDuration()
+//                , Level.valueOf(item.getLevel())
+//                , fileReference
+//        ));
+//    }
+
+    ShopItem createShopItemWithFiles(final ShopItemWriteModel item, final String fileName, final String logoName)
     {
+        var storage = STORAGE_DIRECTORY + File.separator;
+
         return this.shopItemRepo.save(new ShopItem(
                 item.getTitle()
                 , item.getPrice()
@@ -69,6 +99,8 @@ public class ShopService
                 , item.getLength()
                 , item.getDuration()
                 , Level.valueOf(item.getLevel())
+                , storage + fileName
+                , storage + logoName
         ));
     }
 
@@ -129,5 +161,10 @@ public class ShopService
     public List<Integer> getShopItemIdsByRefNumbers(final List<String> itemRefNumbers)
     {
         return this.shopItemRepo.findByRefNumbers(itemRefNumbers);
+    }
+
+    public List<ShopItem> getShopItemsByIds(final List<Integer> itemIds)
+    {
+        return this.shopItemRepo.findByIds(itemIds);
     }
 }

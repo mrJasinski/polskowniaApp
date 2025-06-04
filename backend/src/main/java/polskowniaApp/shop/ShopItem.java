@@ -26,8 +26,11 @@ public class ShopItem
     private int duration;       //lesson duration (eg 45 min )
     @Enumerated(EnumType.STRING)
     private Level level;
+    private String fileReference;
+    private String logoReference;
     @OneToMany(mappedBy = "shopItem")
     private List<OrderedItem> orderedItems;
+
 
     ShopItem()
     {
@@ -52,6 +55,35 @@ public class ShopItem
         this.level = level;
     }
 
+    ShopItem(
+            final String title
+            , final double price
+            , final String description
+            , final Category category
+            , final int length
+            , final int duration
+            , final Level level
+            , final String fileReference)
+    {
+        this(title, price, description, category, length, duration, level);
+        this.fileReference = fileReference;
+    }
+
+    ShopItem(
+            final String title
+            , final double price
+            , final String description
+            , final Category category
+            , final int length
+            , final int duration
+            , final Level level
+            , final String fileReference
+            , final String logoReference)
+    {
+        this(title, price, description, category, length, duration, level, fileReference);
+        this.logoReference = logoReference;
+    }
+
     ShopItemReadModel toReadModel()
     {
         return new ShopItemReadModel(
@@ -63,6 +95,7 @@ public class ShopItem
                 , this.length
                 , this.duration
                 , this.level.toString()
+                , this.logoReference
         );
     }
 
@@ -72,5 +105,10 @@ public class ShopItem
         var timestamp = String.format("%s%s%s%s%s%s%s", dt.getYear(), dt.getMonthValue(), dt.getDayOfMonth(), dt.getHour(), dt.getMinute(), dt.getSecond(), dt.getNano());
 
         return acronym + "_" + level + "_" + timestamp;
+    }
+
+    public String getFileReference()
+    {
+        return this.fileReference;
     }
 }

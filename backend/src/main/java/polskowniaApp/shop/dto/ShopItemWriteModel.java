@@ -1,5 +1,7 @@
 package polskowniaApp.shop.dto;
 
+import java.util.List;
+
 public class ShopItemWriteModel
 {
     private String title;
@@ -9,6 +11,7 @@ public class ShopItemWriteModel
     private int length;
     private int duration;
     private String level;
+//    private List<String> levels;
 
     ShopItemWriteModel()
     {

@@ -15,7 +15,9 @@ export class Order
         , public isToCAccepted : boolean    // akceptacja regulaminu strony/sklepu
         , public comment? : string           // uwagi do zamówienia    
         , public invoiceData? : CustomerData     // jeśli są inne dane do faktury
-        , public addressData? : CustomerData // jeśli inny adres dostawy    
+        , public addressData? : CustomerData // jeśli inny adres dostawy  
+        , public refNumber? : string
+        , public status? : string  
     )
     {
 

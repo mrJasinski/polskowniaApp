@@ -1,13 +1,19 @@
 package polskowniaApp.order;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Service;
+import polskowniaApp.fileManager.FileWrapper;
 import polskowniaApp.order.dto.CustomerDataWriteModel;
 import polskowniaApp.order.dto.OrderReadModel;
 import polskowniaApp.order.dto.OrderWriteModel;
 import polskowniaApp.shop.ShopService;
+import polskowniaApp.shop.ShopItem;
 import polskowniaApp.shop.discount.DiscountCode;
 import polskowniaApp.user.UserService;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -88,4 +94,43 @@ class OrderService
                 .map(Order::toReadModel)
                 .toList();
     }
+
+    List<FileWrapper> getMyShelfByUserId(final int userId)
+    {
+        var result = new ArrayList<FileWrapper>();
+
+//        po user id wyciągam zamówienia
+        var orderIds = this.orderRepo.findOrderIdsByUserId(userId);
+
+        var itemIds = this.orderRepo.findShopItemsIdsByOrderIds(orderIds);
+
+        var items = this.shopService.getShopItemsByIds(itemIds);
+
+        var references = items.stream().filter(i -> i.getFileReference() != null).map(ShopItem::getFileReference).toList();
+
+//        po zamówieniach itemy które mają plik i te wrappować
+
+        for (String r : references)
+        {
+            var f = new File(r);
+            result.add(new FileWrapper(f.getName()));
+        }
+
+        return result;
+    }
+
+    List<Order> getAllOrders()
+    {
+        return this.orderRepo.findAll();
+    }
+
+    List<OrderReadModel> getAllOrdersAsReadModel()
+    {
+        return getAllOrders()
+                .stream()
+                .map(Order::toReadModel)
+                .toList();
+    }
+
+
 }
