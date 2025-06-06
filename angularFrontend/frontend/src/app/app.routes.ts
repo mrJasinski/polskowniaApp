@@ -25,6 +25,7 @@ import { FileManagerComponent } from './modules/fileManager/fileManager.componen
 import { AccountSettingsComponent } from './modules/user/accountSettings.component';
 import { AllOrdersComponent } from './modules/order/allOrders.component';
 import { ShopItemComponent } from './modules/shop/shopItem.component';
+import { OrderComponent } from './modules/order/order.component';
 
 export const routes: Routes =
 [
@@ -50,6 +51,7 @@ export const routes: Routes =
     , { path : 'discountCodes', component : DiscountCodesComponent, canActivate : [AuthGuard]}
     , { path : 'orders', component : OrdersComponent, canActivate : [AuthGuard]}
     , { path : 'allOrders', component : AllOrdersComponent, canActivate : [AuthGuard]}
+    , { path : 'order/:refNumber', component : OrderComponent, canActivate : [AuthGuard]}
     , { path : 'students', component : StudentsComponent, canActivate : [AuthGuard]}
     , { path : 'tasks', component : TasksComponent, canActivate : [AuthGuard]}
     , { path : 'myShelf', component : ShelfComponent, canActivate : [AuthGuard]}

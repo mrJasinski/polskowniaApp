@@ -1,12 +1,13 @@
 package polskowniaApp.order;
 
 import java.util.List;
+import java.util.Optional;
 
 interface OrderRepository
 {
     Order save(Order toSave);
 
-    void assignShopItemsToOrder(int shopItemId, int orderId);
+    void assignShopItemToOrder(int shopItemId, int orderId);
 
     List<Order> findByUserId(int userId);
 
@@ -15,4 +16,8 @@ interface OrderRepository
     List<Integer> findShopItemsIdsByOrderIds(List<Integer> orderIds);
 
     List<Order> findAll();
+
+    Optional<Order> findByRefNumber(String refNumber);
+
+    List<Integer> findOrderedItemsIdsByOrderId(int orderId);
 }

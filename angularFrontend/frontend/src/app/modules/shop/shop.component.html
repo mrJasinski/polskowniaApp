@@ -35,16 +35,20 @@
          <li *ngFor = "let level of levels">
             <input type="checkbox" [value]="level" (change) = "onSelectionLevel($event)" >{{level}}
          </li>
+
+         <p>format</p>
+         <p>stacjonarny/online?</p>
+         <p>cena</p>
     </div>
 
     <div style="display: inline-block;">
-        <tr *ngFor = "let item of filteredShopItems">
+        <tr *ngFor = "let item of filteredShopItems" (click) = "onShowShopItem(item.refNumber)" style="cursor: pointer;">
             <td style = "width: 128px; vertical-align: middle;">
                 <img attr.src = "data:image/png;base64 , {{item.logo}}" alt = "{{item.title}}" style = "width: 128px; height: 128px; border: 1px solid black;">
             </td>
             <td >
                 <!-- link przeprowadzający do danej pozycji np w tytule -->
-                <p (click) = "onShowShopItem(item.refNumber)" style="cursor: pointer;">{{item.title}}
+                <p >{{item.title}}
                     <a  ></a>
                 </p>
                 <p>Cena {{item.price}} PLN</p>

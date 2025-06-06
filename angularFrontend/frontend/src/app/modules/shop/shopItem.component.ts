@@ -1,12 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 import { ShopService } from "./shop.service";
 import { ShopItem } from "./shopItem.model";
+import { RouterLink } from "@angular/router";
 
 @Component
 ({
   selector: 'shop-item',
   templateUrl: './shopItem.component.html'
-  , imports : []
+  , imports : [RouterLink]
 })
 
 export class ShopItemComponent implements OnInit

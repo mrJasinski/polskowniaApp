@@ -1,7 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { AppConstants } from "../../constans/app.constans";
-import { ShopItem } from "./shopItem.model";
 import { ShopItemReadModel } from "./shopItemRead.model";
 import { DiscountCode } from "./discountCode/discountCode.model";
 import { Order } from "../order/order.model";
@@ -10,7 +9,7 @@ import { Order } from "../order/order.model";
 export class ShopService
 {
     shopItems = new Array<ShopItemReadModel>;
-    itemRefNumber = '';
+    itemRefNumber : string;
 
     constructor(private http: HttpClient)
     {

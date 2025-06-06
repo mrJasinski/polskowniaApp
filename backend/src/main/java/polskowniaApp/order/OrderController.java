@@ -2,10 +2,7 @@ package polskowniaApp.order;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import polskowniaApp.order.dto.OrderWriteModel;
 import polskowniaApp.security.JwtService;
 
@@ -43,5 +40,11 @@ class OrderController
     ResponseEntity<?> getMyShelf(HttpServletRequest request)
     {
         return ResponseEntity.ok(this.orderService.getMyShelfByUserId(this.jwtService.getUserIdFromToken(request)));
+    }
+
+    @GetMapping("/order/{refNumber}")
+    ResponseEntity<?> getOrderByRefNumber(@PathVariable("refNumber") String refNumber)
+    {
+        return ResponseEntity.ok(this.orderService.getOrderByRefNumberAsReadModel(refNumber));
     }
 }

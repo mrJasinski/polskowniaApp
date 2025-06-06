@@ -1,7 +1,5 @@
 package polskowniaApp.order;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Service;
 import polskowniaApp.fileManager.FileWrapper;
 import polskowniaApp.order.dto.CustomerDataWriteModel;
@@ -15,6 +13,7 @@ import polskowniaApp.user.UserService;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 class OrderService
@@ -78,8 +77,8 @@ class OrderService
 
     private void assignShopItemsToOrder(final List<Integer> shopItemIds, final int orderId)
     {
-        for (int id : shopItemIds)
-            this.orderRepo.assignShopItemsToOrder(id, orderId);
+        for (int itemId : shopItemIds)
+            this.orderRepo.assignShopItemToOrder(itemId, orderId);
     }
 
     List<Order> getOrdersByUserId(final int userId)
@@ -133,4 +132,24 @@ class OrderService
     }
 
 
+    OrderReadModel getOrderByRefNumberAsReadModel(final String refNumber)
+    {
+        var order = getOrderByRefNumber(refNumber);
+
+        var itemIds = this.orderRepo.findOrderedItemsIdsByOrderId(order.getId());
+
+        var items = this.shopService.getShopItemsByIdsAsReadModel(itemIds);
+
+        var result = order.toReadModel();
+
+        result.setItems(items);
+
+        return result;
+    }
+
+    private Order getOrderByRefNumber(final String refNumber)
+    {
+        return this.orderRepo.findByRefNumber(refNumber)
+                .orElseThrow(() -> new NoSuchElementException("Order with given ref number not found!"));
+    }
 }

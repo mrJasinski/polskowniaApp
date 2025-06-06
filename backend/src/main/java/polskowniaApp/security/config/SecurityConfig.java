@@ -61,19 +61,22 @@ class SecurityConfig
                                 , "/createCourse", "/myCourses/**", "/allCourses"
                                 , "/shop", "/getShopItemCategories", "/addShopItem/**", "/shopItem/**", "/getDiscountCodes"
                                 , "/sendMail", "/getStudents", "/generateDiscountCode", "/getDiscount"
-                        ,"/restorePassword", "/changePassword", "/downloadFile/**", "/fileManager", "/uploadFile**", "/getFiles", "/createOrder", "/orders", "/myShelf", "/allOrders")
+                        ,"/restorePassword", "/changePassword", "/downloadFile/**", "/fileManager", "/uploadFile**", "/getFiles"
+                                , "/createOrder", "/orders", "/myShelf", "/allOrders", "/order/**")
 //                        , "/addShopItem/**", "/getShopItem/**")
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
                 .addFilterBefore(this.authFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/register", "/authenticate", "/shop", "/getShopItemCategories", "/sendMail", "/getDiscount", "/restorePassword").permitAll()
+                        .requestMatchers("/register", "/authenticate"
+                                , "/shop", "/shopItem/**", "/getShopItemCategories"
+                                , "/sendMail", "/getDiscount", "/restorePassword").permitAll()
 //                        .requestMatchers("/register", "/authenticate", "/shop", "/getShopItemCategories").permitAll()
                         .requestMatchers("/dashboard"
                                 , "/createCourse", "/myCourses/**", "/allCourses"
-                                , "/addShopItem/**", "/shopItem/**"
+                                , "/addShopItem/**"
                                 , "/getDiscountCodes", "/getStudents", "/generateDiscountCode", "/changePassword", "/downloadFile/**", "/fileManager", "/uploadFile**"
-                                , "/getFiles", "/createOrder", "/orders", "/myShelf", "/allOrders").authenticated())
+                                , "/getFiles", "/createOrder", "/orders", "/myShelf", "/allOrders", "/order/**").authenticated())
                 .httpBasic(Customizer.withDefaults());
 
         return http.build();

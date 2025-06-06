@@ -1,5 +1,9 @@
 package polskowniaApp.order.dto;
 
+import polskowniaApp.shop.dto.ShopItemReadModel;
+
+import java.util.List;
+
 public class OrderReadModel
 {
     private String refNumber;
@@ -10,7 +14,7 @@ public class OrderReadModel
     private boolean isFourteenDays;
     private boolean isTocAccepted;
     private String comment;
-    //private List<OrderedItem> orderedItems;
+    private List<ShopItemReadModel> items;
 
 
     public OrderReadModel()
@@ -52,8 +56,28 @@ public class OrderReadModel
         return this.deliveryMethod;
     }
 
+    public boolean isFourteenDays()
+    {
+        return this.isFourteenDays;
+    }
+
+    public boolean isTocAccepted()
+    {
+        return this.isTocAccepted;
+    }
+
     public String getComment()
     {
         return this.comment;
+    }
+
+    public List<ShopItemReadModel> getItems()
+    {
+        return this.items;
+    }
+
+    public void setItems(final List<ShopItemReadModel> items)
+    {
+        this.items = items;
     }
 }

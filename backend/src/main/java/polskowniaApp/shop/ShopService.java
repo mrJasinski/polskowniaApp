@@ -167,4 +167,12 @@ public class ShopService
     {
         return this.shopItemRepo.findByIds(itemIds);
     }
+
+    public List<ShopItemReadModel> getShopItemsByIdsAsReadModel(final List<Integer> itemIds)
+    {
+        return this.shopItemRepo.findByIds(itemIds)
+                .stream()
+                .map(ShopItem::toReadModel)
+                .toList();
+    }
 }

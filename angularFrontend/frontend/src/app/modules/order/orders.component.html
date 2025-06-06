@@ -8,6 +8,7 @@
 <body>
     <dashboard-nav-bar></dashboard-nav-bar>
     <h1>Zamówienia</h1>
-    <li *ngFor = "let order of orders">{{order.refNumber}} {{order.paymentMethod}}</li>
+    <li *ngFor = "let order of orders">
+        <a routerLink = "/order/{{order.refNumber}}">{{order.refNumber}}</a> {{order.paymentMethod}}</li>
 </body>
 </html>

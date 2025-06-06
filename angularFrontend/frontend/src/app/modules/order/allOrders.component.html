@@ -14,9 +14,14 @@
 
         </tr>
         <tr *ngFor = "let order of orders">
-            <td>{{order.refNumber}}</td>
+            <td >
+                {{order.refNumber}}
+            </td>
             <td>{{order.status}}</td>
             <td>{{order.comment}}</td>
+            <td>
+                <button (click) = "ngOrderSelected(order.refNumber!)" >Przejdź</button>
+            </td>
         </tr>
     </table>
     </div>

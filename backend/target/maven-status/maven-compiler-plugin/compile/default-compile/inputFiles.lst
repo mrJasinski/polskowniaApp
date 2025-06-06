@@ -61,6 +61,7 @@ D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\user\dto\RoleDTO.j
 D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\course\CourseStatus.java
 D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\shop\discount\DiscountCode.java
 D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\course\dto\CourseReadModel.java
+D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\order\OrderInitializer.java
 D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\utils\MultiPartConfig.java
 D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\course\Course.java
 D:\projekty\polskowniaApp\backend\src\main\java\polskowniaApp\shop\discount\CodeDTO.java

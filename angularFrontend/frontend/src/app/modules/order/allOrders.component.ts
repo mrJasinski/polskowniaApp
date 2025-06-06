@@ -3,6 +3,7 @@ import { DashboardNavBarComponent } from "../dashboard/dashboardNavBar.component
 import { NgFor } from "@angular/common";
 import { Order } from "./order.model";
 import { OrderService } from "./order.service";
+import { Router, RouterLink } from "@angular/router";
 
 @Component
 ({
@@ -15,7 +16,7 @@ export class AllOrdersComponent implements OnInit
 {
   orders : Array<Order>;
 
-  constructor(private orderService : OrderService)
+  constructor(private orderService : OrderService, private router : Router)
   {
 
   }
@@ -23,5 +24,12 @@ export class AllOrdersComponent implements OnInit
   ngOnInit()
   {
     this.orderService.getAllOrders().subscribe(response => this.orders = <any>response.body);
+  }
+
+  ngOrderSelected(refNumber : string)
+  {
+    this.orderService.setRefNumber(refNumber);
+
+    this.router.navigate(["order/" + refNumber]);
   }
 }
