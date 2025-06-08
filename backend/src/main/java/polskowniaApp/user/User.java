@@ -1,7 +1,6 @@
 package polskowniaApp.user;
 
 import jakarta.persistence.*;
-import polskowniaApp.course.Course;
 import polskowniaApp.course.CourseAssignment;
 import polskowniaApp.user.dto.UserReadModel;
 
@@ -21,6 +20,8 @@ public class User
     private UserRole role;
     @OneToMany(mappedBy = "user")
     private Set<CourseAssignment> assignments;
+    @OneToMany(mappedBy = "user")
+    private Set<CustomerData> customerDatas;
 
     User()
     {

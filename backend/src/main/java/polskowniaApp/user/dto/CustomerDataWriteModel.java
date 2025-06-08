@@ -1,14 +1,13 @@
-package polskowniaApp.order;
+package polskowniaApp.user.dto;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-@Entity
-@Table(name = "customer_datas")
-class CustomerData
+public class CustomerDataWriteModel
 {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @JsonProperty
+    private boolean isDefault;
+    private String company;
+    private String taxNumber;
     private String firstName;
     private String lastName;
     private String streetName;
@@ -19,12 +18,27 @@ class CustomerData
     private String phone;
     private String email;
 
-    CustomerData()
+    CustomerDataWriteModel()
     {
     }
 
-    CustomerData(final String firstName, final String lastName, final String streetName, final String streetNumber, final String localNumber, final String zipCode, final String town, final String phone, final String email)
+    CustomerDataWriteModel(
+            final boolean isDefault
+            , final String company
+            , final String taxNumber
+            , final String firstName
+            , final String lastName
+            , final String streetName
+            , final String streetNumber
+            , final String localNumber
+            , final String zipCode
+            , final String town
+            , final String phone
+            , final String email)
     {
+        this.isDefault = isDefault;
+        this.company = company;
+        this.taxNumber = taxNumber;
         this.firstName = firstName;
         this.lastName = lastName;
         this.streetName = streetName;
@@ -36,9 +50,19 @@ class CustomerData
         this.email = email;
     }
 
-    public int getId()
+    public boolean isDefault()
     {
-        return this.id;
+        return this.isDefault;
+    }
+
+    public String getCompany()
+    {
+        return this.company;
+    }
+
+    public String getTaxNumber()
+    {
+        return this.taxNumber;
     }
 
     public String getFirstName()

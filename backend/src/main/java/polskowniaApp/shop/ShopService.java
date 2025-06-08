@@ -54,8 +54,7 @@ public class ShopService
 
     List<String> getShopItemCategories()
     {
-
-        return new ArrayList<String>(Arrays.stream(Category.values())
+        return new ArrayList<>(Arrays.stream(Category.values())
                 .map(Category::getName)
                 .toList());
     }

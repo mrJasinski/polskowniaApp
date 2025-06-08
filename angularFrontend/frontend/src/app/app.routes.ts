@@ -26,6 +26,8 @@ import { AccountSettingsComponent } from './modules/user/accountSettings.compone
 import { AllOrdersComponent } from './modules/order/allOrders.component';
 import { ShopItemComponent } from './modules/shop/shopItem.component';
 import { OrderComponent } from './modules/order/order.component';
+import { CalendarComponent } from './modules/calendar/calendar.component';
+import { CustomerDataFormComponent } from './modules/user/customerDataForm.component';
 
 export const routes: Routes =
 [
@@ -41,6 +43,7 @@ export const routes: Routes =
     , { path: 'authenticate', component: AuthComponent}
     , { path: 'dashboard', component: DashboardComponent, canActivate : [AuthGuard]}
     , { path: 'accountSettings', component: AccountSettingsComponent, canActivate : [AuthGuard]}
+    , { path: 'addressDataForm', component: CustomerDataFormComponent, canActivate : [AuthGuard]}
     , { path: 'createCourse', component: CourseAddFormComponent, canActivate : [AuthGuard]}
     , { path: 'shop', component : ShopComponent}
     , { path : 'addShopItem', component : ShopItemFormComponent, canActivate : [AuthGuard]}
@@ -56,4 +59,5 @@ export const routes: Routes =
     , { path : 'tasks', component : TasksComponent, canActivate : [AuthGuard]}
     , { path : 'myShelf', component : ShelfComponent, canActivate : [AuthGuard]}
     , { path : 'fileManager', component : FileManagerComponent, canActivate : [AuthGuard]}
+    , { path : 'calendar', component : CalendarComponent, canActivate : [AuthGuard]}
 ]

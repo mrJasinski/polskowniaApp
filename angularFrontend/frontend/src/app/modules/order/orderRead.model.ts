@@ -5,6 +5,7 @@ export class OrderReadModel
     constructor
     (
         public refNumber : string
+        , public createdDate : Date
         , public status : string
         , public invoice : boolean
         , public paymentMethod : string

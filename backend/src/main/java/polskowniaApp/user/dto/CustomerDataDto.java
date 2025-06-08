@@ -1,7 +1,13 @@
-package polskowniaApp.order.dto;
+package polskowniaApp.user.dto;
 
-public class CustomerDataWriteModel
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class CustomerDataDto
 {
+    @JsonProperty
+    private boolean isDefault;
+    private String company;
+    private String taxNumber;
     private String firstName;
     private String lastName;
     private String streetName;
@@ -12,12 +18,27 @@ public class CustomerDataWriteModel
     private String phone;
     private String email;
 
-    CustomerDataWriteModel()
+    CustomerDataDto()
     {
     }
 
-    CustomerDataWriteModel(final String firstName, final String lastName, final String streetName, final String streetNumber, final String localNumber, final String zipCode, final String town, final String phone, final String email)
+    public CustomerDataDto(
+            final boolean isDefault
+            , final String company
+            , final String taxNumber
+            , final String firstName
+            , final String lastName
+            , final String streetName
+            , final String streetNumber
+            , final String localNumber
+            , final String zipCode
+            , final String town
+            , final String phone
+            , final String email)
     {
+        this.isDefault = isDefault;
+        this.company = company;
+        this.taxNumber = taxNumber;
         this.firstName = firstName;
         this.lastName = lastName;
         this.streetName = streetName;
@@ -27,6 +48,21 @@ public class CustomerDataWriteModel
         this.town = town;
         this.phone = phone;
         this.email = email;
+    }
+
+    public boolean isDefault()
+    {
+        return this.isDefault;
+    }
+
+    public String getCompany()
+    {
+        return this.company;
+    }
+
+    public String getTaxNumber()
+    {
+        return this.taxNumber;
     }
 
     public String getFirstName()

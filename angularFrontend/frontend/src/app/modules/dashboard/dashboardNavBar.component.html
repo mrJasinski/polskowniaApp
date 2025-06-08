@@ -39,6 +39,10 @@
             <a routerLink="/fileManager" >Zarządzanie plikami</a>
         </div>
 
+        <div *ngIf = "userRole == uR.LECTURER">
+            <a routerLink="/calendar" >Kalendarz</a>
+        </div>
+
         <div>
             <!-- ustawienia konta - zmian hasła adresy wysłki etc -->
             <a routerLink="/accountSettings">Ustawienia konta</a>

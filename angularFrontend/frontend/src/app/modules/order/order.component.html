@@ -12,13 +12,22 @@
         <p>Status {{order.status}}</p>
         <p>Kwota</p>
         <p>Zamawiający</p>
-        <p>data zamówienia</p>
+        <p>data zamówienia {{order.createdDate}}</p>
+        <p>Metoda płatności: {{order.paymentMethod}} status płatności XXX</p>
+        <p>metoda dostawy - jeśli występuje: {{order.deliveryMethod}} </p>
+        <p>Uwagi do zamówienia: {{order.comment}}</p>
         <p>Wymagane działanie - opcja</p>
 
-        <p>Pozycje zamówienia</p>
-        <li *ngFor = "let item of order.items">
-            {{item.refNumber}} {{item.category}}
-        </li>
+        <table>
+            <caption>Pozycje zamówienia:</caption>
+            <tr *ngFor = "let item of order.items">
+                <td>{{item.refNumber}}</td>
+                <td>{{item.category}}</td>
+                <td>
+                    <button>{{assignActionText(item.category)}}</button>
+                </td>
+            </tr>
+        </table>
     </div>
 </body>
 </html>

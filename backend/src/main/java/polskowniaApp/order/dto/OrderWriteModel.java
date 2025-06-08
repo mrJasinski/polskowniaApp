@@ -1,6 +1,6 @@
 package polskowniaApp.order.dto;
 
-import polskowniaApp.shop.dto.ShopItemReadModel;
+import polskowniaApp.user.dto.CustomerDataWriteModel;
 
 import java.util.List;
 

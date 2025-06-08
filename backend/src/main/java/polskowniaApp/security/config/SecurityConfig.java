@@ -62,7 +62,9 @@ class SecurityConfig
                                 , "/shop", "/getShopItemCategories", "/addShopItem/**", "/shopItem/**", "/getDiscountCodes"
                                 , "/sendMail", "/getStudents", "/generateDiscountCode", "/getDiscount"
                         ,"/restorePassword", "/changePassword", "/downloadFile/**", "/fileManager", "/uploadFile**", "/getFiles"
-                                , "/createOrder", "/orders", "/myShelf", "/allOrders", "/order/**")
+                                , "/createOrder", "/orders", "/myShelf", "/allOrders", "/order/**"
+                                , "calendarData**"
+                                , "/sendCustomerData", "/getCustomerDataList")
 //                        , "/addShopItem/**", "/getShopItem/**")
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
@@ -76,7 +78,9 @@ class SecurityConfig
                                 , "/createCourse", "/myCourses/**", "/allCourses"
                                 , "/addShopItem/**"
                                 , "/getDiscountCodes", "/getStudents", "/generateDiscountCode", "/changePassword", "/downloadFile/**", "/fileManager", "/uploadFile**"
-                                , "/getFiles", "/createOrder", "/orders", "/myShelf", "/allOrders", "/order/**").authenticated())
+                                , "/getFiles", "/createOrder", "/orders", "/myShelf", "/allOrders", "/order/**"
+                                , "calendarData**"
+                                , "/sendCustomerData", "/getCustomerDataList").authenticated())
                 .httpBasic(Customizer.withDefaults());
 
         return http.build();

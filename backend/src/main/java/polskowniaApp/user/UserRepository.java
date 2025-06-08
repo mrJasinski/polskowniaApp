@@ -18,4 +18,6 @@ interface UserRepository
     List<User> findByRole(UserRole role);
 
     void updatePasswordByEmail(String email, String password);
+
+    Optional<User> findById(int userId);
 }

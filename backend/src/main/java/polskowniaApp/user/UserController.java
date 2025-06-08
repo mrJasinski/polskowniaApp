@@ -6,6 +6,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
+import polskowniaApp.user.dto.CustomerDataWriteModel;
 import polskowniaApp.security.JwtService;
 import polskowniaApp.user.dto.UserDTO;
 import polskowniaApp.utils.exception.UserAlreadyExistsException;
@@ -76,5 +77,15 @@ class UserController
         }
     }
 
+    @PostMapping("/sendCustomerData")
+    ResponseEntity<?> addCustomerData(@RequestBody CustomerDataWriteModel data, HttpServletRequest request)
+    {
+      return ResponseEntity.ok(this.userService.saveCustomerData(data, this.jwtService.getUserIdFromToken(request)));
+    }
 
+    @GetMapping("/getCustomerDataList")
+    ResponseEntity<?> getCustomerDataList(HttpServletRequest request)
+    {
+        return ResponseEntity.ok(this.userService.getCustomerDataListByUserIdAsDto(this.jwtService.getUserIdFromToken(request)));
+    }
 }

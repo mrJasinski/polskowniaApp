@@ -2,11 +2,8 @@ package polskowniaApp.user;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import polskowniaApp.fileManager.FileWrapper;
 import polskowniaApp.mail.MailService;
-import polskowniaApp.user.dto.UserDTO;
-import polskowniaApp.user.dto.UserLoggedDTO;
-import polskowniaApp.user.dto.UserReadModel;
+import polskowniaApp.user.dto.*;
 import polskowniaApp.utils.exception.UserAlreadyExistsException;
 
 import java.security.SecureRandom;
@@ -18,12 +15,14 @@ import java.util.Set;
 public class UserService
 {
     private final UserRepository userRepo;
+    private final CustomerDataRepository customerDataRepo;
     private final PasswordEncoder encoder;
     private final MailService mailService;
 
-    public UserService(final UserRepository userRepo, final PasswordEncoder encoder, final MailService mailService)
+    public UserService(final UserRepository userRepo, final CustomerDataRepository customerDataRepo, final PasswordEncoder encoder, final MailService mailService)
     {
         this.userRepo = userRepo;
+        this.customerDataRepo = customerDataRepo;
         this.encoder = encoder;
         this.mailService = mailService;
     }
@@ -170,5 +169,41 @@ public class UserService
                 , this.encoder.encode(dto.getPassword())
                 , UserRole.STUDENT
         ));
+    }
+
+    User getUserById(final int userId)
+    {
+        return this.userRepo.findById(userId)
+                .orElseThrow(() -> new NoSuchElementException("User with given id not found!"));
+    }
+
+    CustomerData saveCustomerData(final CustomerDataWriteModel data, final int userId)
+    {
+        if (data.isDefault())
+            this.customerDataRepo.setDefaultToFalseByUserId(userId);
+
+        return this.customerDataRepo.save(new CustomerData(
+                data.getCompany()
+                , data.getTaxNumber()
+                , data.getFirstName()
+                , data.getLastName()
+                , data.getStreetName()
+                , data.getStreetNumber()
+                , data.getLocalNumber()
+                , data.getZipCode()
+                , data.getTown()
+                , data.getPhone()
+                , data.getEmail()
+                , data.isDefault()
+                , getUserById(userId)
+        ));
+    }
+
+    List<CustomerDataDto> getCustomerDataListByUserIdAsDto(final int userId)
+    {
+        return this.customerDataRepo.findByUserId(userId)
+                .stream()
+                .map(CustomerData::toDto)
+                .toList();
     }
 }

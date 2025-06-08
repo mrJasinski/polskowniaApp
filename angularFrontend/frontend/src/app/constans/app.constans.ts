@@ -16,4 +16,6 @@ export const  AppConstants = {
     , DISCOUNT_CODES_URL : "/discountCodes"
     , GENERATE_DISCOUNT_CODE_URL : "/generateDiscountCode"
     , HOME_URL : "/"
+    , CALENDAR_URL : "/calendar"
+    , ADDRESS_FORM_URL : "/addressDataForm"
 }

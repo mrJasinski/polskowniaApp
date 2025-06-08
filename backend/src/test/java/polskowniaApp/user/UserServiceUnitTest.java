@@ -38,7 +38,7 @@ class UserServiceUnitTest
         var passwordLength = 8;
 
 //        system under test
-        var toTest = new UserService(null, mockEncoder, null);
+        var toTest = new UserService(null, null, mockEncoder, null);
 
 //        when
         var result = toTest.passwordGenerator();

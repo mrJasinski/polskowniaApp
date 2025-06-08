@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <dashboard-nav-bar></dashboard-nav-bar>
+    <div>
+        <form [formGroup] = "customerDataForm" (ngSubmit) = "onSubmit()">
+            <div style="font-size: larger; display: inline-block; margin-left: 100px;">
+
+                <div>
+                    <input type="checkbox" (click)="onDefaultSelection($event)">Ustaw dane jako domyślne
+                </div>
+            
+                <div>
+                    <input type="checkbox" (click)="onInvoiceSelection($event)">Firma/faktura
+                </div>
+            
+                <div class="form-group" *ngIf = "isInvoice">
+                    <label for = "company" >Nazwa firmy: </label>
+                    <input type = "company" class = "form-control" formControlName = "company" />
+                </div>
+
+                <div class="form-group" *ngIf = "isInvoice" >
+                    <label for = "taxNumber" >NIP: </label>
+                    <input type = "taxNumber" class = "form-control" formControlName = "taxNumber" />
+                </div>
+            
+                <div class="form-group" >
+                    <label for = "firstName" >Imię: </label>
+                    <input type = "firstName" class = "form-control" formControlName = "firstName" />
+                </div>
+
+                <div class="form-group" >
+                    <label for = "lastName" >Nazwisko: </label>
+                    <input type = "lastName" class = "form-control" formControlName = "lastName" />
+                </div>
+
+                <div class="form-group" >
+                    <label for = "streetName" >Ulica: </label>
+                    <input type = "streetName" class = "form-control" formControlName = "streetName" />
+                </div>
+
+                <div class="form-group" >
+                    <label for = "streetNumber" >Numer budynku: </label>
+                    <input type = "streetNumber" class = "form-control" formControlName = "streetNumber" />
+                </div>
+                <!-- numer lokalu -->
+                <div class="form-group" >
+                    <label for = "localNumber" >Numer lokalu: </label>
+                    <input type = "localNumber" class = "form-control" formControlName = "localNumber" />
+                </div>
+
+                <div class="form-group" >
+                    <label for = "zipCode" >Kod pocztowy: </label>
+                    <input type = "zipCode" class = "form-control" formControlName = "zipCode" />
+                </div>
+
+                <div class="form-group" >
+                    <label for = "town" >Miejscowość: </label>
+                    <input type = "town" class = "form-control" formControlName = "town" />
+                </div>
+
+                <div class="form-group" >
+                    <label for = "phone" >Telefon: </label>
+                    <input type = "phone" class = "form-control" formControlName = "phone" />
+                </div>
+
+                <div class="form-group" >
+                    <label for = "email" >E - mail: </label>
+                    <input type = "email" class = "form-control" formControlName = "email" />
+                </div>
+
+                <div>
+                    <button class="btn btn-primary" type="submit" [disabled]="!customerDataForm.valid">Zapisz</button> | 
+                    <button class="btn btn-primary" type="reset">Reset</button>
+                </div>
+
+                <div *ngIf = "formMsg != null">
+                    <p>{{formMsg}}</p>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

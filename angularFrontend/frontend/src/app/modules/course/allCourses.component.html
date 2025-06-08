@@ -20,6 +20,7 @@
             <th>Czas trwania lekcji [min]</th>
             <th>Status</th>
             <th>Ilość uczestników</th>
+            <th>Zadania</th>
         </tr>
         <tr *ngFor = "let course of courses">
             <td>
@@ -35,6 +36,10 @@
             <td>{{course.length}}</td>
             <td>{{course.duration}}</td>
             <td>{{course.status}}</td>
+            <td></td>
+            <td>
+                <button>Przejdź do zadań kursu</button>
+            </td>
         </tr>
     </table>
 </body>

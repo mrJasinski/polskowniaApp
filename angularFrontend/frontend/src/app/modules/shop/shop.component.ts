@@ -22,7 +22,7 @@ export class ShopComponent
     categories = new Array<String>;
     selectedCategories = new Array<String>;
     levels = levels;
-    selectedLevels : Array<String>;
+    selectedLevels = new Array<String>;
 
     userRole = '';
     uR = UserRole;
@@ -74,8 +74,8 @@ export class ShopComponent
       // 'wszystkie' odznacza pozostałe checkboxy
       // dowolny inny odznacza 'wszystkie'
 
-      if (selected != this.categories.at(0))
-      {
+     // if (selected != this.categories.at(0))
+     // {
         if (isChecked)
           this.selectedCategories.push(selected);
   
@@ -90,16 +90,14 @@ export class ShopComponent
   
         if (this.selectedCategories.length > 0)
           this.filteredShopItems = this.shopItems.filter(item => this.selectedCategories.includes(item.category));
-      }
+     // }
 
-      if (selected == this.categories.at(0))
-        this.filteredShopItems = this.shopItems;
+      //if (selected == this.categories.at(0))
+      //  this.filteredShopItems = this.shopItems;
     }
 
     onSelectionLevel($event)
     {
-      //nie sortuje
-
       const selected = $event.target.value;
       const isChecked = $event.target.checked;
 

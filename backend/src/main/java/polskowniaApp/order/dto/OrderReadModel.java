@@ -2,11 +2,13 @@ package polskowniaApp.order.dto;
 
 import polskowniaApp.shop.dto.ShopItemReadModel;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class OrderReadModel
 {
     private String refNumber;
+    private LocalDate createdDate;
     private String status;
     private boolean isInvoice;
     private String paymentMethod;
@@ -21,19 +23,25 @@ public class OrderReadModel
     {
     }
 
-    public OrderReadModel(final String refNumber, final String status, final boolean isInvoice, final String paymentMethod, final String deliveryMethod, final String comment)
+    public OrderReadModel(final String refNumber, final LocalDate createdDate, final String status, final boolean isInvoice, final String paymentMethod, final String deliveryMethod, final String comment)
     {
         this.refNumber = refNumber;
+        this.createdDate = createdDate;
         this.status = status;
         this.isInvoice = isInvoice;
         this.paymentMethod = paymentMethod;
         this.deliveryMethod = deliveryMethod;
-        this.comment = comment;
+        this.comment = comment != null ? comment : "(brak)";
     }
 
     public String getRefNumber()
     {
         return this.refNumber;
+    }
+
+    public LocalDate getCreatedDate()
+    {
+        return this.createdDate;
     }
 
     public String getStatus()

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        table, th, td 
+        {
+         border: 1px solid black;
+        }
+
+        th, td
+        {
+            width: 100px;
+        }
+    </style>
+
+</head>
+<body>
+    <dashboard-nav-bar></dashboard-nav-bar>
+    <div style="width: 80%; margin: auto;" >
+        <h3>Kalendarz zajęć</h3>
+
+        <table id = 'calendarTable'>
+            <caption>
+                <button (click)="onSwitchWeek(-7)" >&lt;</button>
+                {{weekStart}} - {{weekEnd}}
+                <button (click)="onSwitchWeek(7)">&gt;</button>
+            </caption>
+            <tr>
+                <th></th>
+                <th *ngFor = "let day of weekdays" >{{day}}</th>
+            </tr>
+            <tr *ngFor = " let hour of hours, let i = index">
+                <td>{{hour}}</td>
+                <td *ngFor = "let day of weekdays, let j = index" style="cursor: pointer;" (click) = "onCellSelection(i, j)" ></td>
+            </tr>
+        </table>
+    </div>
+    
+</body>
+</html>

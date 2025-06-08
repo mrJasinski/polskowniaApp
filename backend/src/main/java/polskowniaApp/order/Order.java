@@ -3,6 +3,7 @@ package polskowniaApp.order;
 import jakarta.persistence.*;
 import polskowniaApp.order.dto.OrderReadModel;
 import polskowniaApp.shop.discount.DiscountCode;
+import polskowniaApp.user.CustomerData;
 import polskowniaApp.user.User;
 
 import java.time.LocalDate;
@@ -61,6 +62,7 @@ class Order
     {
         return new OrderReadModel(
                 this.refNumber
+                , this.createdDate
                 , this.status.name()
                 , this.isInvoice
                 , this.paymentMethod
