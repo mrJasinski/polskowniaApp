@@ -1,8 +1,8 @@
 import { NgFor } from "@angular/common";
 import { Component } from "@angular/core";
 import { Student } from "./student.model";
-import { StudentService } from "./student.service";
-import { DashboardNavBarComponent } from "../dashboard/dashboardNavBar.component";
+import { DashboardNavBarComponent } from "../../dashboard/dashboardNavBar.component";
+import { UserService } from "../userService.service";
 
 @Component
 ({
@@ -15,13 +15,13 @@ export class StudentsComponent
 {
     students = new Array<Student>;
 
-    constructor(private studentService : StudentService)
+    constructor(private userService : UserService)
     {
         
     }
 
     ngOnInit()
     {
-// pobieranie listy kursantów z serwera
+      this.userService.getStudents().subscribe(response => { this.students = <any>response.body });
     }
 }

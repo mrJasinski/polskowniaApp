@@ -15,15 +15,15 @@
         <table>
             <tr>
                 <td style="border: 1px solid black;" *ngFor = "let data of dataList " >
-                    <input type="radio" [checked] = "data.isDefault">Użyj jako domyślne
+                    <input type="radio" [checked] = "data.isDefault" (click)="onSetDefault()" >Użyj jako domyślne
                     <p>{{data.firstName}} {{data.lastName}}</p>
                     <!-- dodać jeszcze wyświetlenie numeru mieszkania jeśli dostępny -->
                     <p>{{data.streetName}} {{data.streetNumber}}</p>
                     <p>{{data.zipCode}} {{data.town}}</p>
                     <p>{{data.phone}}</p>
                     <p>{{data.email}}</p>
-                    <button>usuń</button>
-                    <button>edytuj</button>
+                    <button>Usuń</button>
+                    <button>Edytuj</button>
                 </td>
             </tr>
         </table>

@@ -11,6 +11,7 @@ import polskowniaApp.shop.discount.DiscountCodeDTO;
 import polskowniaApp.shop.dto.ShopItemWriteModel;
 
 import java.net.URI;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
@@ -105,5 +106,11 @@ class ShopController
         {
             return ResponseEntity.badRequest().body("Podany kod rabatowy nie istnieje!");
         }
+    }
+
+    @GetMapping("/getPossibleTerms")
+    ResponseEntity<?> getPossibleTerms(@RequestParam int length, @RequestParam int duration, @RequestParam List<String> days)
+    {
+        return ResponseEntity.ok(this.shopService.getPossibleTermsByLengthAndDurationAndDays(length, duration, days));
     }
 }

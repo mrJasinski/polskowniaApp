@@ -31,4 +31,9 @@ export class AccountSettingsComponent implements OnInit
     {
         this.router.navigate([AppConstants.ADDRESS_FORM_URL]);
     }
+
+    onSetDefault()
+    {
+      //co przekazać aby było wiadomo które to są dane?
+    }
 }

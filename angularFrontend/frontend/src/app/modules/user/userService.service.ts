@@ -20,4 +20,14 @@ export class UserService
     {
         return this.http.get(AppConstants.APP_URL + "/getCustomerDataList", { observe : 'response'});
     }
+
+    getStudents()
+    {
+        return this.http.get(AppConstants.APP_URL + "/students", { observe : 'response'});
+    }
+
+    getDefaultCustomerData()
+    {
+        return this.http.get(AppConstants.APP_URL + "/getDefaultCustomerData", { observe : 'response'});
+    }
 }

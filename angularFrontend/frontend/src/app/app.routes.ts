@@ -18,7 +18,7 @@ import { AllCoursesComponent } from './modules/course/allCourses.component';
 import { CartSummaryComponent } from './modules/shop/cart/cartSummary.component';
 import { ShopItemFormComponent } from './modules/shop/shopItemForm.component';
 import { DiscountCodesComponent } from './modules/shop/discountCode/discountCodes.component';
-import { StudentsComponent } from './modules/student/students.component';
+import { StudentsComponent } from './modules/user/student/students.component';
 import { TasksComponent } from './modules/task/tasks.component';
 import { ShelfComponent } from './modules/shelf/shelf.component';
 import { FileManagerComponent } from './modules/fileManager/fileManager.component';

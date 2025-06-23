@@ -7,6 +7,7 @@ import { CustomerDataForm } from "./customerDataForm.component";
 import { Order } from "../../order/order.model";
 import { CustomerData } from "../../order/customerData.model";
 import { Router } from "@angular/router";
+import { UserService } from "../../user/userService.service";
 
 @Component
 ({
@@ -22,6 +23,8 @@ export class CartSummaryComponent
   deliveryPrice = 0;
   discountValue = 0;
   checkout = 0;
+
+  customerData : CustomerData;
 
   discountMsg : string;
 
@@ -44,7 +47,7 @@ export class CartSummaryComponent
   orderForm : FormGroup;
   
 
-  constructor(private shopService : ShopService, private router : Router)
+  constructor(private shopService : ShopService, private userService : UserService, private router : Router)
   {
 
   }
@@ -78,6 +81,8 @@ export class CartSummaryComponent
         , 'isToCAccepted' : new FormControl(null, [Validators.required])
         , 'isFourteenDaysAccepted' : new FormControl(null, [Validators.required])
       });
+
+      this.userService.getDefaultCustomerData().subscribe( response => this.customerData = <any>response.body);
 
 
     this.shopItems = this.shopService.getItemsAddedToCart();

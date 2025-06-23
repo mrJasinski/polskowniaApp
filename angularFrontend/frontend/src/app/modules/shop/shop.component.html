@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    
     <style>
         li
         {
@@ -22,6 +23,15 @@
     <div>
         <button routerLink = "/cart" >Przejdź do koszyka</button>
         <p>sortuj wg xxx</p>
+        <div>
+            <label> Sortowanie: </label>
+            <select>
+                <option>Cena: od najniższej</option>
+                <option>Cena: od najwyższej</option>
+                <option>Tytuł: A -> Z</option>
+                <option>Tytuł: Z -> A</option>
+            </select>
+        </div>
         <p>pokaż na stronę</p>
     </div>
 
@@ -38,15 +48,18 @@
 
          <p>format</p>
          <p>stacjonarny/online?</p>
-         <p>cena</p>
+         <h3>Cena</h3>
+         <!-- obsługa filtrowania ceną -->
+         <input style="max-width: 50px;" type="number" name="minPrice" >
+         <input style="max-width: 50px;" type="number" name="maxPrice">
     </div>
 
     <div style="display: inline-block;">
-        <tr *ngFor = "let item of filteredShopItems" (click) = "onShowShopItem(item.refNumber)" style="cursor: pointer;">
-            <td style = "width: 128px; vertical-align: middle;">
+        <tr *ngFor = "let item of filteredShopItems">
+            <td style = "width: 128px; vertical-align: middle;" (click) = "onShowShopItem(item.refNumber)">
                 <img attr.src = "data:image/png;base64 , {{item.logo}}" alt = "{{item.title}}" style = "width: 128px; height: 128px; border: 1px solid black;">
             </td>
-            <td >
+            <td (click) = "onShowShopItem(item.refNumber)"  >
                 <!-- link przeprowadzający do danej pozycji np w tytule -->
                 <p >{{item.title}}
                     <a  ></a>
@@ -54,6 +67,10 @@
                 <p>Cena {{item.price}} PLN</p>
                 <p>{{item.description}}</p>
                 <p>{{item.category}}</p>
+            </td>
+            <!-- tylko dla kursów i spotkań online -->
+            <td>
+                <button (click) = "onShowCalendarDialog(item)" >Sprawdź dostępne terminy</button>
             </td>
             <td>
                 <button (click) = "onAddToCart(item)">Dodaj do koszyka</button>
@@ -67,5 +84,20 @@
             </td>
         </tr>
     </div>
+
+    <dialog id = "calendarDialog">
+        <button  ></button>
+        <p> Kalendarz z dostępnymi terminami kursu!</p>
+        <table>
+            <tr>
+                <th *ngFor = " let day of weekdays"></th>
+            </tr>
+            <tr>
+
+            </tr>
+        </table>
+        <button  >Zapisz</button>
+    </dialog>
+
 </body>
 </html>

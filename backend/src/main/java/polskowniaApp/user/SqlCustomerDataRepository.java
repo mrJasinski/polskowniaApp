@@ -15,4 +15,8 @@ interface SqlCustomerDataRepository extends CustomerDataRepository, JpaRepositor
     @Override
     @Query(value = "UPDATE customer_datas SET is_default = false WHERE user_id = :userId", nativeQuery = true)
     void setDefaultToFalseByUserId(int userId);
+
+    @Override
+    @Query(value = "SELECT * FROM customer_datas WHERE user_id = :userId AND is_default = true", nativeQuery = true)
+    CustomerData findDefaultByUserId(int userId);
 }

@@ -11,10 +11,8 @@ import polskowniaApp.utils.Level;
 
 import java.io.File;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.time.format.TextStyle;
+import java.util.*;
 
 import static polskowniaApp.fileManager.FileManagerService.STORAGE_DIRECTORY;
 
@@ -173,5 +171,24 @@ public class ShopService
                 .stream()
                 .map(ShopItem::toReadModel)
                 .toList();
+    }
+
+    Object getPossibleTermsByLengthAndDurationAndDays(final int length, final int duration, final List<String> days)
+    {
+//        TODO
+        var startDay = LocalDate.now();
+
+        while (0==0)
+        {
+            if (days.contains(startDay.getDayOfWeek().getDisplayName(TextStyle.FULL, new Locale("pl", "PL"))))
+                break;
+
+            startDay = startDay.plusDays(1);
+        }
+
+        
+
+
+        return null;
     }
 }

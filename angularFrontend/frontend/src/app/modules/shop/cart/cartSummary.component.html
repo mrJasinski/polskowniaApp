@@ -21,6 +21,16 @@
         <div style="float: left; width: 50%; margin: auto">
         <div>
             <h2>Dane zamawiającego</h2>
+            <p>Użyj innych danych</p>
+            <div>
+                <p>{{customerData.firstName}} {{customerData.lastName}}</p>
+                <p>{{customerData.streetName}} {{customerData.streetNumber}}</p>
+                <p>{{customerData.zipCode}} {{customerData.town}}</p>
+                <p>{{customerData.phone}}</p>
+                <p>{{customerData.email}}</p>
+            </div>
+
+
             <!-- adres jeśli materiały fizyczne? -->
              <!-- ew jesli faktura -->
             <!-- <input type="checkbox" (change)="selectInvoice($event)" formControlName = "invoiceSelector" >Faktura -->
@@ -28,9 +38,9 @@
 
             <!-- <customer-data-form class = "form-group" formGroupName = "customerData" ></customer-data-form> -->
 
-            <div style="text-align: left;">
+            <!-- <div style="text-align: left;">
 
-                  <!-- nazwa i nip jako opcja tylko do faktury -->
+                  nazwa i nip jako opcja tylko do faktury
                 
                 <div class="form-group" *ngIf = "isInvoice">
                     <label for = "company" >Nazwa firmy: </label>
@@ -61,8 +71,8 @@
                     <label for = "streetNumber" >Numer budynku: </label>
                     <input type = "streetNumber" class = "form-control" formControlName = "streetNumber" />
                 </div>
-                <!-- numer lokalu -->
-                <div class="form-group" >
+                 numer lokalu -->
+                <!-- <div class="form-group" >
                     <label for = "localNumber" >Numer lokalu: </label>
                     <input type = "localNumber" class = "form-control" formControlName = "localNumber" />
                 </div>
@@ -87,7 +97,7 @@
                     <input type = "email" class = "form-control" formControlName = "email" />
                 </div>
     
-            </div>
+            </div> -->
             
              
         </div>

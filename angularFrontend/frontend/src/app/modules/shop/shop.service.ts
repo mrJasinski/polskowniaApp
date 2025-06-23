@@ -96,6 +96,11 @@ export class ShopService
             , { responseType : 'text'});
     }*/
 
+    getPossibleTerms(length : number, duration : number, days : string[])
+    {
+        return this.http.get(AppConstants.APP_URL + "/getPossibleTerms",  {params : {length , duration, days}, observe : 'response'});
+    }
+
     getItemRefNumber()
     {
         return this.itemRefNumber;

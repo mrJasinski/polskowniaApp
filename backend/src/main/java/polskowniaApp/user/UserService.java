@@ -206,4 +206,22 @@ public class UserService
                 .map(CustomerData::toDto)
                 .toList();
     }
+
+    List<UserReadModel> getUsersByRoleAsReadModel(final UserRole role)
+    {
+        return getUsersByRole(role)
+                .stream()
+                .map(User::toReadModel)
+                .toList();
+    }
+
+    List<User> getUsersByRole(final UserRole role)
+    {
+        return this.userRepo.findByRole(role);
+    }
+
+    CustomerDataDto getDefaultCustomerDataByIdAsDto(final int userId)
+    {
+        return this.customerDataRepo.findDefaultByUserId(userId).toDto();
+    }
 }

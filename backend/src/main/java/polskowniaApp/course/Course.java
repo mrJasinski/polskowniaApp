@@ -87,9 +87,9 @@ public class Course
 
         var daysWithNames = new ArrayList<String>();
 
-        for(int i = 0; i < days.length(); i++)
+        for(int i = 0; i < this.days.length(); i++)
         {
-            var x = Integer.parseInt(String.valueOf(days.charAt(i))) + 1;
+            var x = Integer.parseInt(String.valueOf(this.days.charAt(i))) + 1;
 
             var day = DayOfWeek.of(x).getDisplayName(TextStyle.FULL, locale);
 

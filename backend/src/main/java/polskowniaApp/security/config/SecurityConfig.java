@@ -60,11 +60,11 @@ class SecurityConfig
                         "/register", "/authenticate", "/dashboard"
                                 , "/createCourse", "/myCourses/**", "/allCourses"
                                 , "/shop", "/getShopItemCategories", "/addShopItem/**", "/shopItem/**", "/getDiscountCodes"
-                                , "/sendMail", "/getStudents", "/generateDiscountCode", "/getDiscount"
+                                , "/sendMail", "/students", "/generateDiscountCode", "/getDiscount"
                         ,"/restorePassword", "/changePassword", "/downloadFile/**", "/fileManager", "/uploadFile**", "/getFiles"
                                 , "/createOrder", "/orders", "/myShelf", "/allOrders", "/order/**"
                                 , "calendarData**"
-                                , "/sendCustomerData", "/getCustomerDataList")
+                                , "/sendCustomerData", "/getCustomerDataList", "/getDefaultCustomerData")
 //                        , "/addShopItem/**", "/getShopItem/**")
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
@@ -77,10 +77,10 @@ class SecurityConfig
                         .requestMatchers("/dashboard"
                                 , "/createCourse", "/myCourses/**", "/allCourses"
                                 , "/addShopItem/**"
-                                , "/getDiscountCodes", "/getStudents", "/generateDiscountCode", "/changePassword", "/downloadFile/**", "/fileManager", "/uploadFile**"
+                                , "/getDiscountCodes", "/students", "/generateDiscountCode", "/changePassword", "/downloadFile/**", "/fileManager", "/uploadFile**"
                                 , "/getFiles", "/createOrder", "/orders", "/myShelf", "/allOrders", "/order/**"
                                 , "calendarData**"
-                                , "/sendCustomerData", "/getCustomerDataList").authenticated())
+                                , "/sendCustomerData", "/getCustomerDataList", "/getDefaultCustomerData").authenticated())
                 .httpBasic(Customizer.withDefaults());
 
         return http.build();

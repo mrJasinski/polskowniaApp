@@ -67,7 +67,9 @@ public class User
 
     UserReadModel toReadModel()
     {
-//        TODO
-        return null;
+        return new UserReadModel(
+                this.name
+                , this.email
+        );
     }
 }

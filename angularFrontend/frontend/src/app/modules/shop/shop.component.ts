@@ -7,6 +7,7 @@ import { Router, RouterLink } from "@angular/router";
 import { AppConstants } from "../../constans/app.constans";
 import { ShopItemReadModel } from "./shopItemRead.model";
 import { levels } from "../../constans/levels.constant";
+import { weekdays } from "../../constans/weekdays.constant";
 
 @Component
 ({
@@ -23,6 +24,9 @@ export class ShopComponent
     selectedCategories = new Array<String>;
     levels = levels;
     selectedLevels = new Array<String>;
+
+    weekdays = weekdays;
+
 
     userRole = '';
     uR = UserRole;
@@ -63,19 +67,9 @@ export class ShopComponent
 
     onSelectionCategory($event)
     {
-      //założenia
-      // zaznaczenie 'wszystko' odznacza inne wybrane opcje i wyświetla wszystkie pozycje na sklepie
-      // zaznaczenie jednej lub więcej kategorii filtruje pozycje dostępne na sklepie wg wybranych kategorii
-
       const selected = $event.target.value;
       const isChecked = $event.target.checked;
 
-      // jak obsłużyć zmianę zaznaczenia?
-      // 'wszystkie' odznacza pozostałe checkboxy
-      // dowolny inny odznacza 'wszystkie'
-
-     // if (selected != this.categories.at(0))
-     // {
         if (isChecked)
           this.selectedCategories.push(selected);
   
@@ -90,10 +84,6 @@ export class ShopComponent
   
         if (this.selectedCategories.length > 0)
           this.filteredShopItems = this.shopItems.filter(item => this.selectedCategories.includes(item.category));
-     // }
-
-      //if (selected == this.categories.at(0))
-      //  this.filteredShopItems = this.shopItems;
     }
 
     onSelectionLevel($event)
@@ -140,5 +130,18 @@ export class ShopComponent
       this.shopService.itemRefNumber = refNumber;
 
       this.router.navigate([AppConstants.SHOP_ITEM_URL + "/" + refNumber])
+    }
+
+    onShowCalendarDialog(item : ShopItemReadModel)
+    {
+      const dialog = document.getElementById("calendarDialog") as HTMLDialogElement;
+
+      
+      // TODO tylko testowo - wybierane przez użytkownika w dialogu
+      const days = ['Pon', 'śr'];
+
+      this.shopService.getPossibleTerms(item.duration, item.length, days);
+
+      dialog.showModal();
     }
 }

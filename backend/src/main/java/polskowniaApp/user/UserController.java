@@ -40,7 +40,7 @@ class UserController
         return ResponseEntity.ok(logged);
     }
 
-    @GetMapping("/getStudents")
+    @GetMapping("/students")
     ResponseEntity<?> getStudents()
     {
         return ResponseEntity.ok(this.userService.getStudentsAsReadModel());
@@ -87,5 +87,11 @@ class UserController
     ResponseEntity<?> getCustomerDataList(HttpServletRequest request)
     {
         return ResponseEntity.ok(this.userService.getCustomerDataListByUserIdAsDto(this.jwtService.getUserIdFromToken(request)));
+    }
+
+    @GetMapping("/getDefaultCustomerData")
+    ResponseEntity<?> getDefaultCustomerData(HttpServletRequest request)
+    {
+        return ResponseEntity.ok(this.userService.getDefaultCustomerDataByIdAsDto(this.jwtService.getUserIdFromToken(request)));
     }
 }
